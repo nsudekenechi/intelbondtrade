@@ -11,8 +11,9 @@ function sendEmail($to, $subject, $emailFile, $search, $replace)
     $mail = new PHPMailer(true);
 
     try {
-        $senderemail = "admin@intelbondtrade.ltd";
-        $senderpassword = "#Intelbond123";
+        $senderemail = $_ENV["SENDER_EMAIL"];
+
+        $senderpassword = $_ENV["SENDER_PASSWORD"];
         $body = file_get_contents($emailFile);
         $body = str_replace($search, $replace, $body);
         $mail->SMTPDebug = 0;

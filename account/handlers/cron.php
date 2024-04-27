@@ -1,5 +1,5 @@
 <?php
-require_once "C:/xampp/htdocs/Intelbondtrade/db/db_connect.php";
+require_once dirname(dirname(__DIR__)) . '/db/db_connect.php';
 // Updating profits
 $q = "SELECT deposits.id  deposit_id, deposits.start_date,deposits.end_date, plans.increase, deposits.amount,deposits.last_profit, deposits.user FROM deposits 
      JOIN plans ON deposits.plan = plans.id  WHERE  deposits.active=true AND deposits.verified = true";

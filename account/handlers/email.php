@@ -3,8 +3,8 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 require '../../vendor/autoload.php';
-// $dotenv = Dotenv\Dotenv::createImmutable('../../');
-// $dotenv->load();
+$dotenv = Dotenv\Dotenv::createImmutable('../../');
+$dotenv->load();
 function sendEmail($to, $subject, $emailFile, $search, $replace)
 {
 

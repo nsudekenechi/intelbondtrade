@@ -395,16 +395,17 @@ require_once "./includes/header.php";
                                         <div class="form-icon">
                                             <em class="icon ni ni-link-alt"></em>
                                         </div>
+
                                         <?php
                                         $query = "SELECT username from users WHERE id = '$userid'";
                                         $res = mysqli_query($conn, $query);
                                         ?>
-                                        <input type="text" class="form-control copy-text" id="refUrl"
-                                            value="http://localhost/Intelbondtrade/?ref=<?= $res->fetch_column(); ?>"
-                                            readonly>
+
+                                        <input type="text" class="form-control copy-text" id="refUrl" value="" readonly>
                                     </div>
                                 </div>
                             </div>
+                            <input type="text" hidden id="refUser" value="<?= $res->fetch_column(); ?>">
                             <div class="nk-refwg-stats card-inner bg-lighter">
                                 <div class="nk-refwg-group g-3">
                                     <div class="nk-refwg-name">
@@ -491,6 +492,10 @@ require_once "./includes/header.php";
     function greetUser(timeofday) {
         message.innerHTML = timeofday[Math.floor(Math.random() * timeofday.length)]
     }
+    let refUrl = document.querySelector("#refUrl")
+    let refUser = document.querySelector("#refUser")
+    refUrl.value = `${location.origin}/?ref=${refUser.value}`
+
 </script>
 <?php
 require_once "./includes/footer.php";

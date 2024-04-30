@@ -242,14 +242,14 @@ if ($res->num_rows <= 0) {
                                                             item.remove()
                                                         })
                                                         document.querySelector(".nk-notification").innerHTML = `
-                                                                                                                                                                                                            <div class="nk-notification-item dropdown-inner">
-                                                                                                                                                                                                                                            <div class="nk-notification-content">
-                                                                                                                                                                                                                                                <div class="nk-notification-text">
-                                                                                                                                                                                                                                                No Notifcations
-                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                            `
+                                                                                                                                                                                                                                                                            <div class="nk-notification-item dropdown-inner">
+                                                                                                                                                                                                                                                                                                            <div class="nk-notification-content">
+                                                                                                                                                                                                                                                                                                                <div class="nk-notification-text">
+                                                                                                                                                                                                                                                                                                                No Notifcations
+                                                                                                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                                                            `
                                                     })
                                                 }
                                             </script>
@@ -318,16 +318,13 @@ if ($res->num_rows <= 0) {
 
                                                     <span>
                                                         <?php
-                                                        if ($row['fullname']) {
-                                                            ?>
-                                                            <?= $row['fullname'][0] . explode(" ", $row['fullname'])[1][0] ?>
-                                                            <?php
+                                                        if (strstr($row['fullname'], ' ')) {
+                                                            echo $row['fullname'][0] . explode(" ", $row['fullname'])[1][0];
                                                         } else {
-                                                            ?>
-
-                                                            <?php
+                                                            echo $row['fullname'][0] . substr($row['fullname'], -1);
                                                         }
                                                         ?>
+
 
                                                     </span>
 

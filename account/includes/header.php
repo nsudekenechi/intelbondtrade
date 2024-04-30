@@ -71,12 +71,16 @@ if ($res->num_rows <= 0) {
                         <div class="nk-header-menu" data-content="headerNav">
                             <div class="nk-header-mobile">
                                 <div class="nk-header-brand">
-                                    <a href="html/index.php" class="logo-link">
-                                        <img class="logo-light logo-img" src="./images/logo.png"
+                                    <a href="./" class="logo-link">
+                                        <h1 style="font-size:1.5rem ;">
+                                            intelbond<span class='in-text-gradiant' style="background: linear-gradient(to right, #0163ea, #00bcf9);
+;   background-clip: text; -webkit-text-fill-color: transparent;">trade</span>
+                                        </h1>
+                                        <!-- <img class="logo-light logo-img" src="./images/logo.png"
                                             srcset="./images/logo2x.png 2x" alt="logo">
                                         <img class="logo-dark logo-img" src="./images/logo-dark.png"
                                             srcset="./images/logo-dark2x.png 2x" alt="logo-dark">
-                                        <span class="nio-version">Invest</span>
+                                        <span class="nio-version">Invest</span> -->
                                     </a>
                                 </div>
                                 <div class="nk-menu-trigger me-n2">
@@ -238,14 +242,14 @@ if ($res->num_rows <= 0) {
                                                             item.remove()
                                                         })
                                                         document.querySelector(".nk-notification").innerHTML = `
-                                                                                                                                                <div class="nk-notification-item dropdown-inner">
-                                                                                                                                                                                <div class="nk-notification-content">
-                                                                                                                                                                                    <div class="nk-notification-text">
-                                                                                                                                                                                    No Notifcations
-                                                                                                                                                                                </div>
-                                                                                                                                                                                </div>
-                                                                                                                                                                            </div>
-                                                                                                                                                `
+                                                                                                                                                                                                        <div class="nk-notification-item dropdown-inner">
+                                                                                                                                                                                                                                        <div class="nk-notification-content">
+                                                                                                                                                                                                                                            <div class="nk-notification-text">
+                                                                                                                                                                                                                                            No Notifcations
+                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                        `
                                                     })
                                                 }
                                             </script>
@@ -311,8 +315,20 @@ if ($res->num_rows <= 0) {
                                         <div class="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
                                             <div class="user-card">
                                                 <div class="user-avatar">
+
                                                     <span>
-                                                        <?= $row['fullname'][0] . explode(" ", $row['fullname'])[1][0] ?>
+                                                        <?php
+                                                        if ($row['fullname']) {
+                                                            ?>
+                                                            <?= $row['fullname'][0] . explode(" ", $row['fullname'])[1][0] ?>
+                                                            <?php
+                                                        } else {
+                                                            ?>
+
+                                                            <?php
+                                                        }
+                                                        ?>
+
                                                     </span>
 
                                                 </div>

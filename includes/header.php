@@ -96,7 +96,7 @@
 								</div>
 								<div class="m-brand-logo">
 									<a href="./" style="display:block;position:relative;">
-										<h1>Fundfl<span class='in-text-gradiant'>ex</span></h1>
+										<h1>intelbond<span class='in-text-gradiant'>trade</span></h1>
 									</a>
 								</div>
 

@@ -163,7 +163,7 @@ include_once ("./includes/header.php");
 						</div>
 						<div class="in-about-text-area-1 wow fadeInUp" data-wow-delay="650ms"
 							data-wow-duration="1000ms">
-							We are africa biggest crypto company, we specialise majorly in crypto exchange and real
+							We are america biggest crypto company, we specialise majorly in crypto exchange and real
 							estate. We are here to provide you with innovative financial solutions through experienced
 							expert guidance, diverse options, robust performance, personalized approach, and
 							transparency. Choose Intelbondtrade for your investment journey.

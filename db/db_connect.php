@@ -1,6 +1,6 @@
 <?php
 $host = "localhost";
-$mode = "";
+$mode = "test";
 if ($mode == "test") {
     $username = "root";
     $password = "";

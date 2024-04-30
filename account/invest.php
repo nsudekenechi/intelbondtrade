@@ -56,7 +56,7 @@ require_once ("./includes/header.php");
                                         }
                                         ?>
                                         <input type="text" hidden value="<?= $row['wallet_rate']; ?>">
-                                        <input type="text" hidden value="<?= $row['wallet_symbol']; ?>">
+                                        <input type="text" hidden value="">
                                     </li>
                                     <?php
                                 }

@@ -170,7 +170,7 @@ require_once ("./includes/header.php");
                                             <div class="coin-item">
                                                 <div class="coin-icon">
                                                     <span style="font-size:2rem;">
-                                                        <?= $row['wallet_symbol']; ?>
+
                                                     </span>
                                                 </div>
                                                 <div class="coin-info">
@@ -195,7 +195,7 @@ require_once ("./includes/header.php");
                                                             <div class="coin-item">
                                                                 <div class="coin-icon">
                                                                     <span style="font-size:2rem;">
-                                                                        <?= $row['wallet_symbol']; ?>
+
                                                                     </span>
                                                                 </div>
                                                                 <div class="coin-info">
@@ -386,7 +386,7 @@ require_once ("./includes/header.php");
 <?php
 if (isset($_GET["deposit"])) {
     $id = $_GET["deposit"];
-    $query = "SELECT deposits.amount, wallet.wallet_address,wallet.wallet_rate, wallet.wallet_qrcode, wallet.wallet_symbol FROM deposits JOIN wallet ON deposits.wallet = wallet.id WHERE deposits.id = '$id'";
+    $query = "SELECT deposits.amount, wallet.wallet_address,wallet.wallet_rate, wallet.wallet_qrcode, wallet.wallet_code,wallet.wallet_symbol FROM deposits JOIN wallet ON deposits.wallet = wallet.id WHERE deposits.id = '$id'";
     $res = mysqli_query($conn, $query);
     $row = $res->fetch_assoc();
     ?>
@@ -403,9 +403,9 @@ if (isset($_GET["deposit"])) {
                             <div class="tab-pane active" id="tabItem1">
                                 <div class="justify-center">
                                     <h3>
-                                        <?= $row['wallet_symbol']; ?>
 
-                                        <?= number_format($row['amount'] * $row['wallet_rate'], intval($row['amount'] * $row['wallet_rate'], ) == 0 ? 5 : 2); ?>
+
+                                        <?= number_format($row['amount'] * $row['wallet_rate'], intval($row['amount'] * $row['wallet_rate'], ) == 0 ? 5 : 2) . ' ' . $row['wallet_code']; ?>
                                     </h3>
                                 </div>
                                 <div class="justify-center">

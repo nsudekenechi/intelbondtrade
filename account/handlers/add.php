@@ -38,7 +38,7 @@ if (isset($_POST["verify_deposit"])) {
             $row = $res->fetch_assoc();
             $username = $row["username"];
             $amount = $row['amount'] * $row['wallet_rate'];
-            $amount = $row['wallet_symbol'] . number_format($amount, intval($amount) == 0 ? 5 : 2);
+            $amount = number_format($amount, intval($amount) == 0 ? 5 : 2);
             $walletType = $row['wallet_code'];
 
             $msg = html_entity_decode(" <p style='margin-bottom: 10px;'> This is to inform you that $username deposited $amount into your $walletType wallet</p>  <p style='margin-bottom: 10px;'>Please verify deposit and confirm payment from your dashboard </p>");
@@ -75,7 +75,7 @@ if (isset($_POST["withdrawal"])) {
 
     $username = $row["username"];
     $amount = $row['amount'] * $row['wallet_rate'];
-    $amount = $row['wallet_symbol'] . number_format($amount, intval($amount) == 0 ? 5 : 2);
+    $amount = number_format($amount, intval($amount) == 0 ? 5 : 2);
     $walletType = $row['wallet_code'];
 
     $msg = html_entity_decode(" <p style='margin-bottom: 10px;'> This is to inform you that $username wants to withdraw $amount to their $walletType wallet</p>  <p style='margin-bottom: 10px;'>Check your dashboard for more details about the withdrawal</p>");

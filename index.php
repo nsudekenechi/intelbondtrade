@@ -186,7 +186,7 @@ include_once ("./includes/header.php");
 							</div>
 						</div>
 						<div class="in-btn-1 wow fadeInUp" data-wow-delay="850ms" data-wow-duration="1000ms">
-							<a style="color:white;cursor:pointer;" id="gotoplans">Our Plans</a>
+							<a href="./about.php" style="color:white;cursor:pointer;" id="gotoplans">Read More</a>
 						</div>
 					</div>
 				</div>
@@ -245,8 +245,8 @@ include_once ("./includes/header.php");
 				<p>Start Today!</p>
 				<h2>Interested in maximizing your financial potential? </h2>
 				<div class="in-cta-btn-grp d-flex">
-					<a class="d-flex align-items-center justify-content-center" href="contact.html">Get started</a>
-					<a class="d-flex align-items-center justify-content-center" href="contact.html">Start Investing</a>
+					<a class="d-flex align-items-center justify-content-center" href="./signup.php">Get started</a>
+					<a class="d-flex align-items-center justify-content-center" href="./login.php">Start Investing</a>
 				</div>
 			</div>
 		</div>

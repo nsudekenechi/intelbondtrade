@@ -23,7 +23,7 @@ if ($showHeader) {
 							<div class="logo-widget">
 								<div class="brand-logo">
 									<a href="" style="padding:0px;margin:0px;">
-										<h3 style="color:#555;">Fundfl<span class='in-text-gradiant'>ex</span></h3>
+										<h3 style="color:#555;">intelbond<span class='in-text-gradiant'>trade</span></h3>
 
 									</a>
 								</div>

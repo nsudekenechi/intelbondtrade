@@ -161,7 +161,7 @@ if (isset($_GET["verify"])) {
                                         <?= $row['start_date']; ?>
                                     </td>
                                     <td>
-                                        <?= $row['wallet_symbol'] . ' ' . number_format($row['amount'] * $row['wallet_rate'], intval($row['amount'] * $row['wallet_rate'], ) == 0 ? 5 : 2); ?>
+                                        <?= number_format($row['amount'] * $row['wallet_rate'], intval($row['amount'] * $row['wallet_rate'], ) == 0 ? 5 : 2); ?>
                                     </td>
                                     <td>
                                         <?php
@@ -249,7 +249,7 @@ if (isset($_GET["verify"])) {
                                         <?= $row["date"]; ?>
                                     </td>
                                     <td>
-                                        <?= $row['wallet_symbol'] . ' ' . number_format($row['amount'] * $row['wallet_rate'], intval($row['amount'] * $row['wallet_rate'], ) == 0 ? 5 : 2); ?>
+                                        <?= number_format($row['amount'] * $row['wallet_rate'], intval($row['amount'] * $row['wallet_rate'], ) == 0 ? 5 : 2); ?>
                                     </td>
                                     <td>
                                         <?= $row["wallet_name"]; ?>

@@ -118,8 +118,12 @@
 						</div>
 						<!-- /Mobile-Menu -->
 					</div>
+					<div id="google_translate_element"></div>
 				</div>
 			</div>
+
+
+
 		</header>
 		<!-- search filed -->
 		<div class="search-body">

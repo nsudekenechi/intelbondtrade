@@ -173,9 +173,9 @@ if ($showHeader) {
 		setInterval(() => {
 			paymentAlert.style.display = "flex";
 			if (Math.floor(Math.random() * 10) <= 5) {
-				paymentAlert.innerHTML = `Someone from ${countries[Math.floor(Math.random() * countries.length)]} deposited $${Math.floor(Math.random() * 100000).toLocaleString()}`;
+				paymentAlert.innerHTML = `Someone from ${countries[Math.floor(Math.random() * countries.length)]} deposited $${Math.floor(Math.random() * 8000).toLocaleString()}`;
 			} else {
-				paymentAlert.innerHTML = `Someone from ${countries[Math.floor(Math.random() * countries.length)]} withdrew $${Math.floor(Math.random() * 100000).toLocaleString()}`;
+				paymentAlert.innerHTML = `Someone from ${countries[Math.floor(Math.random() * countries.length)]} withdrew $${Math.floor(Math.random() * 8000).toLocaleString()}`;
 
 			}
 			setTimeout(() => {

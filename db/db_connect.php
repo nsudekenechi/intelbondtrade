@@ -1,7 +1,7 @@
 <?php
 $host = "localhost";
 $mode = "test";
-if ($mode == "test") {
+if ($mode == "") {
     $username = "root";
     $password = "";
     $db = "intelbondtrade";

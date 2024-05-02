@@ -42,12 +42,21 @@ if (isset($_POST["verify_deposit"])) {
             $walletType = $row['wallet_code'];
 
             $msg = html_entity_decode(" <p style='margin-bottom: 10px;'> This is to inform you that $username deposited $amount into your $walletType wallet</p>  <p style='margin-bottom: 10px;'>Please verify deposit and confirm payment from your dashboard </p>");
-
+            // sending email to admin  
             $query = "SELECT email,username FROM users WHERE admin = true";
             $res = mysqli_query($conn, $query);
             $row = $res->fetch_assoc();
 
-            // sending email to user when 
+
+            $send = sendEmail($row["email"], "Deposit Request", "../../admin/email.html", ["{request type}", "{name}", "{body}", "{date}"], ["Deposit", $row["username"], $msg, date("Y")]);
+            // sending email to user  
+
+            $msg = html_entity_decode(" <p style='margin-bottom: 10px;'> You just deposited $amount</p>  <p style='margin-bottom: 10px;'>Your account would be updated once payment is verified </p>");
+
+            $query = "SELECT email,username FROM users WHERE id = '$user'";
+            $res = mysqli_query($conn, $query);
+            $row = $res->fetch_assoc();
+
             $send = sendEmail($row["email"], "Deposit Request", "../../admin/email.html", ["{request type}", "{name}", "{body}", "{date}"], ["Deposit", $row["username"], $msg, date("Y")]);
 
             if ($send) {

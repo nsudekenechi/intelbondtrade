@@ -16,7 +16,6 @@ function sendEmail($to, $subject, $emailFile, $search, $replace)
 
     try {
         $senderemail = $_ENV["SENDER_EMAIL"];
-
         $senderpassword = $_ENV["SENDER_PASSWORD"];
         $senderFrom = "Intelbondtrade";
         $body = file_get_contents($emailFile);

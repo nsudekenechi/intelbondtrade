@@ -105,6 +105,26 @@ if (isset($_GET["verify"])) {
             height: 100%;
             object-fit: cover;
         }
+
+        .proof_image {
+            position: absolute;
+            left: 0%;
+            top: 0%;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0, 0, 0, .3);
+            z-index: 10;
+            display: none;
+        }
+
+        .proof_image img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
     </style>
 </head>
 
@@ -137,7 +157,7 @@ if (isset($_GET["verify"])) {
                                 <th>Date</th>
                                 <th>Amount</th>
                                 <th>Status</th>
-                                <th>Payment Proof</th>
+                                <th></th>
 
                                 <th></th>
 
@@ -177,16 +197,12 @@ if (isset($_GET["verify"])) {
                                         ?>
                                     </td>
                                     <td>
-                                        <button type="button" class="btn " data-bs-toggle="modal"
-                                            data-bs-target="#modalAlert<?= $row['id']; ?>">View</button>
-                                        <div class="modal fade" tabindex="-1" id="modalAlert<?= $row['id']; ?>">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <img src="../account/images/paymentProof/<?= $row['payment_proof']; ?>"
-                                                        alt="">
-                                                </div>
-                                            </div>
+                                        <span class="view_proof_image" data-view="<?= $row['id']; ?>">View</span>
+                                        <div class="proof_image" id="img<?= $row['id']; ?>">
+                                            <img src="../account/images/paymentProof/<?= $row['payment_proof']; ?>" alt=""
+                                                class="">
                                         </div>
+
 
 
                                     </td>
@@ -204,6 +220,7 @@ if (isset($_GET["verify"])) {
                                         }
                                         ?>
                                     </td>
+
 
                                 </tr>
                                 <?php
@@ -342,13 +359,26 @@ if (isset($_GET["verify"])) {
     </div>
     <script src="../account/assets/js/bundle.js?ver=3.2.2"></script>
     <script src="../account/assets/js/scripts.js?ver=3.2.2"></script>
-    <script src="../account/js/libs/datatable-btns.js?ver=3.2.2"></script>
+    <!-- <script src="../account/js/libs/datatable-btns.js?ver=3.2.2"></script> -->
     <script>
         let verify = document.querySelectorAll("a[href].btn");
         verify.forEach(item => {
             item.onclick = () => {
                 item.innerHTML = `<span class="spinner-border spinner-border-sm ml-2" role="status"
                                                 aria-hidden="true"></span> `
+            }
+        })
+        // viewing proof image
+        let views = document.querySelectorAll(".view_proof_image")
+        let imgs = document.querySelectorAll(".proof_image")
+        views.forEach(view => {
+            view.onclick = () => {
+                document.querySelector(`#img${view.dataset.view}`).style.display = "flex";
+            }
+        })
+        imgs.forEach(img => {
+            img.onclick = () => {
+                img.style.display = "none"
             }
         })
     </script>

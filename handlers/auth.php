@@ -29,13 +29,28 @@ if (isset($_POST["signUp"])) {
         $res = mysqli_query($conn, $query);
 
         // Sending user notification
-        $msg = "Your referral $refUser just signed in";
-        $query = "INSERT INTO notifications (user, message, time) VALUES ('$user', '$msg', '$date') ";
+        // $msg = "Your referral $refUser just signed in";
+        // $query = "INSERT INTO notifications (user, message, time) VALUES ('$user', '$msg', '$date') ";
         $res = mysqli_query($conn, $query);
         session_destroy();
     }
 
     if ($res) {
+        $msg = html_entity_decode("<p style='margin-bottom: 25px;'>
+        Welcome to Intelbondtrade, we're pleased to have you here, below is your login details, please keep your password private.
+        </p>
+        <p>
+           Your username is $username and password is $password
+        </p>
+        <a href='https://intelbondtrade.ltd/login.php' style='background-color:#6576ff;border-radius:4px;color:#ffffff;display:inline-block;font-size:13px;font-weight:600;line-height:44px;text-align:center;text-decoration:none;text-transform: uppercase; padding: 0 30px'>Login</a>
+        ");
+        $send = sendEmail(
+            $email,
+            "Welcome to Intelbondtrade",
+            "../email.html",
+            ["{type}", "{user}", "{body}", "{date}"],
+            ["", $username, $msg, date("Y")]
+        );
         header("Location: ../login.php");
     } else {
         header("Location: ../signup.php");

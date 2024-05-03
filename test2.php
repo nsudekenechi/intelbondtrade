@@ -9,8 +9,6 @@ try {
     $mail = new PHPMailer(true);
     $senderemail = $_ENV["SENDER_EMAIL"];
     $senderpassword = $_ENV["SENDER_PASSWORD"];
-    // $body = file_get_contents($emailFile);
-    // $body = str_replace($search, $replace, $body);
     $mail->SMTPDebug = 2;
     $mail->isSMTP();
     $mail->Host = 'intelbondtrade.ltd';

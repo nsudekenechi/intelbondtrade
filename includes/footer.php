@@ -121,7 +121,7 @@ if ($showHeader) {
 
 	</footer>
 	<div id="payment-alert" class="in-pagination text-center ul-li ">
-		aaa
+
 	</div>
 	<style>
 		#payment-alert {
@@ -132,7 +132,7 @@ if ($showHeader) {
 			align-items: center;
 			padding: 20px;
 			top: 80%;
-			right: 0%;
+			left: 5%;
 			z-index: 10;
 			border: 1px solid var(--main-color);
 			color: black;
@@ -168,7 +168,7 @@ if ($showHeader) {
 		let paymentAlert = document.querySelector("#payment-alert");
 		let country = document.querySelector("#country");
 		let money = document.querySelector("#money");
-		let minutes = 7;
+		let minutes = 1;
 
 		setInterval(() => {
 			paymentAlert.style.display = "flex";

@@ -44,9 +44,9 @@
 
 <body>
 	<!-- <div id="preloader"></div> -->
-	<div class="up">
+	<!-- <div class="up">
 		<a href="#" class="scrollup text-center"><i class="fas fa-chevron-up"></i></a>
-	</div>
+	</div> -->
 	<?php
 	require_once ("./db/db_connect.php");
 	if (isset($_GET["ref"])) {

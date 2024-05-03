@@ -242,14 +242,14 @@ if ($res->num_rows <= 0) {
                                                             item.remove()
                                                         })
                                                         document.querySelector(".nk-notification").innerHTML = `
-                                                                                                                                                                                                                                                                                                <div class="nk-notification-item dropdown-inner">
-                                                                                                                                                                                                                                                                                                                                <div class="nk-notification-content">
-                                                                                                                                                                                                                                                                                                                                    <div class="nk-notification-text">
-                                                                                                                                                                                                                                                                                                                                    No Notifcations
-                                                                                                                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                                                                                `
+                                                                                                                                                                                                                                                                                                            <div class="nk-notification-item dropdown-inner">
+                                                                                                                                                                                                                                                                                                                                            <div class="nk-notification-content">
+                                                                                                                                                                                                                                                                                                                                                <div class="nk-notification-text">
+                                                                                                                                                                                                                                                                                                                                                No Notifcations
+                                                                                                                                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                                                                                            `
                                                     })
                                                 }
                                             </script>
@@ -383,6 +383,6 @@ if ($res->num_rows <= 0) {
                 </div><!-- .container-fliud -->
             </div>
             <!-- main header @e -->
-            <h1>
+            <h1 hidden>
                 <?= $_SESSION["user"]; ?>
             </h1>

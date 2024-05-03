@@ -161,7 +161,7 @@ require_once "./includes/header.php";
                             $query = "SELECT * FROM deposits
                             JOIN plans
                             ON deposits.plan = plans.id
-                             WHERE deposits.active = true AND deposits.user='$userid'";
+                             WHERE deposits.active = true AND deposits.user='$userid' AND deposits.verified = true";
                             $res = mysqli_query($conn, $query);
                             ?>
                             <h5 class="nk-block-title">Active Plan <span class="count text-base">

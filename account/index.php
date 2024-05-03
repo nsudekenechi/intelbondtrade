@@ -125,9 +125,7 @@ require_once "./includes/header.php";
                                                 <?php
                                                 if ($increase > 0) {
                                                     ?>
-                                                    <span class="change up"><span class="sign"></span>
-                                                        <?= $increase; ?>%
-                                                    </span>
+
                                                     <?php
                                                 }
                                                 ?>
@@ -153,15 +151,7 @@ require_once "./includes/header.php";
                                         <div class="nk-iv-wg2-text">
                                             <div class="nk-iv-wg2-amount">$
                                                 <?= number_format($row['invested'], 2); ?>
-                                                <?php
-                                                if ($res->num_rows > 0) {
-                                                    ?>
-                                                    <span class="change up"><span class="sign"></span>
-                                                        <?= $increase / 100; ?>%
-                                                    </span>
-                                                    <?php
-                                                }
-                                                ?>
+
                                             </div>
                                         </div>
                                     </div>
@@ -181,14 +171,7 @@ require_once "./includes/header.php";
                                                 <?php
                                                 $query = "SELECT profits from users WHERE id='$userid'";
                                                 $res = mysqli_query($conn, $query);
-                                                if ($res->fetch_column() > 0) {
-                                                    ?>
-                                                    <span class="change up">
-                                                        <span class="sign"></span>
-                                                        <?= $res->fetch_column() / 100; ?> %
-                                                    </span>
-                                                    <?php
-                                                }
+
                                                 ?>
 
                                             </div>
@@ -259,15 +242,7 @@ require_once "./includes/header.php";
                                             <div class="nk-iv-wg2-amount ui-v2">
                                                 $
                                                 <?= number_format($profit, 2); ?>
-                                                <?php
-                                                if ($profit > 0) {
-                                                    ?>
-                                                    <span class="change up">
-                                                        <span class="sign"></span>
-                                                    </span>
-                                                    <?php
-                                                }
-                                                ?>
+
                                             </div>
                                             <ul class="nk-iv-wg2-list">
                                                 <li>
@@ -322,7 +297,7 @@ require_once "./includes/header.php";
                                         </div>
                                         <div class="nk-iv-wg2-text">
                                             <?php
-                                            $q = "SELECT * FROM deposits WHERE user='$userid' AND active = true";
+                                            $q = "SELECT * FROM deposits WHERE user='$userid' AND active = true AND verified=true";
                                             $res = mysqli_query($conn, $q);
                                             $activePlans = mysqli_num_rows($res);
                                             ?>

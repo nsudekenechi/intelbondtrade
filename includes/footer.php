@@ -216,17 +216,15 @@ if ($showHeader) {
 <script src="assets/js/jquery.nice-select.min.js"></script>
 <script src="assets/js/script.js"></script>
 
-<!-- <script>window.gtranslateSettings = { "default_language": "en", "native_language_names": true, "wrapper_selector": ".gtranslate_wrapper", "flag_style": "3d", "alt_flags": { "en": "usa" } }</script>
-<script src="https://cdn.gtranslate.net/widgets/latest/float.js" defer=""></script>
-<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit2"></script> -->
-<!-- <script type="text/javascript">
+<script type="text/javascript">
 	function googleTranslateElementInit() {
 		new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
 	}
 </script>
 
 <script type="text/javascript"
-	src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> -->
+	src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 </body>
 
 </html>

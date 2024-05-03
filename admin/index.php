@@ -110,8 +110,8 @@ if (isset($_GET["verify"])) {
             position: absolute;
             left: 0%;
             top: 0%;
-            width: 100vw;
-            height: 100%;
+            width: 100%;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -121,10 +121,9 @@ if (isset($_GET["verify"])) {
         }
 
         .proof_image img {
-            width: 100%;
-            height: 100%;
+            width: 80%;
+            height: 80%;
             object-fit: contain;
-            object-position: top;
         }
     </style>
 </head>
@@ -157,8 +156,8 @@ if (isset($_GET["verify"])) {
                                 <th>Fullname</th>
                                 <th>Date</th>
                                 <th>Amount</th>
-                                <th>Payment Proof</th>
                                 <th>Status</th>
+                                <th></th>
 
                                 <th></th>
 
@@ -176,7 +175,7 @@ if (isset($_GET["verify"])) {
                                 ?>
                                 <tr>
                                     <td>
-                                        <?= $row['fullname']; ?>
+                                        <span class="f_name"> <?= $row['fullname']; ?></span>
                                     </td>
                                     <td>
                                         <?= $row['start_date']; ?>
@@ -185,14 +184,6 @@ if (isset($_GET["verify"])) {
                                         <?= number_format($row['amount'] * $row['wallet_rate'], intval($row['amount'] * $row['wallet_rate'], ) == 0 ? 5 : 2); ?>
                                     </td>
                                     <td>
-                                        <span class="view_proof_image" data-view="<?= $row['id']; ?>">View</span>
-                                        <div class="proof_image" id="img<?= $row['id']; ?>">
-                                            <img src="../account/images/paymentProof/<?= $row['payment_proof']; ?>" alt=""
-                                                class="">
-                                        </div>
-                                    </td>
-                                    <td>
-
                                         <?php
                                         if ($row['verified']) {
                                             ?>
@@ -204,7 +195,15 @@ if (isset($_GET["verify"])) {
                                             <?php
                                         }
                                         ?>
-
+                                    </td>
+                                    <td>
+                                        <!-- <span type="span" class="btn  view_proof_image"
+                                            data-view="<?= $row['id']; ?>">View</span> -->
+                                        <span>View</span>
+                                        <div class="proof_image" id="img<?= $row['id']; ?>">
+                                            <img src="../account/images/paymentProof/<?= $row['payment_proof']; ?>" alt=""
+                                                class="">
+                                        </div>
 
 
 
@@ -332,11 +331,12 @@ if (isset($_GET["verify"])) {
                                 <th>Referred User</th>
                                 <th>Date</th>
                                 <th>Amount Earned</th>
+                                <th>Amount Deposited</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                            $query = "SELECT users.username, referredUser.username as ref_user,referrals.date,  referrals.ref_earned
+                            $query = "SELECT users.username, referredUser.username as ref_user, referredUser.id as refUserId,  referrals.date,  referrals.ref_earned
                         FROM referrals JOIN users ON referrals.user = users.id
                         JOIN users AS referredUser ON referrals.ref_user = referredUser.id
                         ";
@@ -348,6 +348,16 @@ if (isset($_GET["verify"])) {
                                     <td><?= $row['ref_user']; ?></td>
                                     <td><?= $row['date']; ?></td>
                                     <td>$<?= number_format($row['ref_earned'], 2); ?></td>
+                                    <td>
+                                        <?php
+                                        $refUserId = $row['refUserId'];
+                                        $q = "SELECT amount FROM deposits WHERE user= '$refUserId' LIMIT 1";
+                                        $qres = mysqli_query($conn, $q);
+                                        $amountDeposited = $qres->fetch_column();
+
+                                        ?>
+                                    <td>$<?= number_format($amountDeposited, 2); ?></td>
+                                    </td>
                                 </tr>
                                 <?php
                             }
@@ -372,16 +382,22 @@ if (isset($_GET["verify"])) {
             }
         })
         // viewing proof image
-        let views = document.querySelectorAll(".view_proof_image")
+        let views = document.querySelectorAll("button.view_proof_image")
         let imgs = document.querySelectorAll(".proof_image")
         views.forEach(view => {
             view.onclick = () => {
+                alert(1)
                 document.querySelector(`#img${view.dataset.view}`).style.display = "flex";
             }
         })
         imgs.forEach(img => {
             img.onclick = () => {
                 img.style.display = "none"
+            }
+        })
+        document.querySelectorAll(".f_name").forEach(item => {
+            item.onclick = () => {
+                alert(1)
             }
         })
     </script>

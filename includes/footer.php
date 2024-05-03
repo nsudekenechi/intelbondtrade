@@ -168,7 +168,7 @@ if ($showHeader) {
 		let paymentAlert = document.querySelector("#payment-alert");
 		let country = document.querySelector("#country");
 		let money = document.querySelector("#money");
-		let minutes = 1;
+		let minutes = 7;
 
 		setInterval(() => {
 			paymentAlert.style.display = "flex";

@@ -111,7 +111,7 @@ if (isset($_GET["verify"])) {
             left: 0%;
             top: 0%;
             width: 100vw;
-            height: 100vh;
+            height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -157,8 +157,8 @@ if (isset($_GET["verify"])) {
                                 <th>Fullname</th>
                                 <th>Date</th>
                                 <th>Amount</th>
+                                <th>Payment Proof</th>
                                 <th>Status</th>
-                                <th></th>
 
                                 <th></th>
 
@@ -185,6 +185,14 @@ if (isset($_GET["verify"])) {
                                         <?= number_format($row['amount'] * $row['wallet_rate'], intval($row['amount'] * $row['wallet_rate'], ) == 0 ? 5 : 2); ?>
                                     </td>
                                     <td>
+                                        <span class="view_proof_image" data-view="<?= $row['id']; ?>">View</span>
+                                        <div class="proof_image" id="img<?= $row['id']; ?>">
+                                            <img src="../account/images/paymentProof/<?= $row['payment_proof']; ?>" alt=""
+                                                class="">
+                                        </div>
+                                    </td>
+                                    <td>
+
                                         <?php
                                         if ($row['verified']) {
                                             ?>
@@ -196,13 +204,7 @@ if (isset($_GET["verify"])) {
                                             <?php
                                         }
                                         ?>
-                                    </td>
-                                    <td>
-                                        <span class="view_proof_image" data-view="<?= $row['id']; ?>">View</span>
-                                        <div class="proof_image" id="img<?= $row['id']; ?>">
-                                            <img src="../account/images/paymentProof/<?= $row['payment_proof']; ?>" alt=""
-                                                class="">
-                                        </div>
+
 
 
 

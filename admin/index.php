@@ -121,8 +121,8 @@ if (isset($_GET["verify"])) {
         }
 
         .proof_image img {
-            width: 80%;
-            height: 80%;
+            width: 100%;
+            height: 100%;
             object-fit: contain;
         }
     </style>

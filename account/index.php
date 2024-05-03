@@ -314,7 +314,7 @@ require_once "./includes/header.php";
                                                 deposits 
                                                 JOIN plans
                                                 ON deposits.plan = plans.id
-                                                WHERE deposits.user='$userid' AND deposits.active = true  LIMIT 4";
+                                                WHERE deposits.user='$userid' AND deposits.active = true AND deposits.verified = true  LIMIT 4";
                                                 $res = mysqli_query($conn, $query);
                                                 while ($row = mysqli_fetch_assoc($res)) {
                                                     ?>

@@ -29,9 +29,10 @@
 	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 	<!-- Smartsupp Live Chat script -->
+	<!-- Smartsupp Live Chat script -->
 	<script type="text/javascript">
 		var _smartsupp = _smartsupp || {};
-		_smartsupp.key = '446613c523a222c885741f9c801382cb8c6a37d4';
+		_smartsupp.key = 'a074459eca7f741aad071fb163b6e0970c12b830';
 		window.smartsupp || (function (d) {
 			var s, c, o = smartsupp = function () { o._.push(arguments) }; o._ = [];
 			s = d.getElementsByTagName('script')[0]; c = d.createElement('script');
@@ -39,7 +40,7 @@
 			c.src = 'https://www.smartsuppchat.com/loader.js?'; s.parentNode.insertBefore(c, s);
 		})(document);
 	</script>
-	<!-- <noscript> Powered by <a href=“https://www.smartsupp.com” target=“_blank”>Smartsupp</a></noscript> -->
+
 </head>
 
 <body>

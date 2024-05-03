@@ -185,7 +185,7 @@ if (isset($_GET["verify"])) {
                                     </td>
                                     <td>
 
-                                        <span class="view_proof_image">View</span>
+                                        <span class="view_proof_image" data-view="<?= $row['id']; ?>">View</span>
                                         <div class="proof_image" id="img<?= $row['id']; ?>">
                                             <img src="../account/images/paymentProof/<?= $row['payment_proof']; ?>" alt=""
                                                 class="">

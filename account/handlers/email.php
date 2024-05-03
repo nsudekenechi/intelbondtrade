@@ -8,9 +8,10 @@ $dotenv->load();
 function sendEmail($to, $subject, $emailFile, $search, $replace)
 {
 
-    $mail = new PHPMailer(true);
 
     try {
+        $mail = new PHPMailer(true);
+
         $senderemail = $_ENV["SENDER_EMAIL"];
 
         $senderpassword = $_ENV["SENDER_PASSWORD"];

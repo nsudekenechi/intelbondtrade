@@ -59,15 +59,7 @@ include_once ("./includes/header.php");
                                     <div class="col-md-6  position-relative">
                                         <input required style="padding:30px;" type="password" name="password"
                                             placeholder="Enter Password" minlength="8">
-                                        <div class="position-absolute  left-0 w-100 bg-white border p-4 rounded-lg"
-                                            style=" top: 80%;font-size:12px;border-radius:7px;color:red;display:none;"
-                                            id="regExp">
-                                            <p>Enter Characeter A-Z</p>
-                                            <p>Enter Characeter a-z</p>
-                                            <p>Enter Characeter 0-9</p>
-                                            <p>Enter Special Character &#!_</p>
-                                            <p>Minimum Length 8</p>
-                                        </div>
+
                                     </div>
 
                                     <div class="col-md-6  position-relative">
@@ -121,30 +113,7 @@ include_once ("./includes/header.php");
         regExp.style.display = "none"
     }
 
-    passwords[0].onkeyup = () => {
-        let exp = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).{8,}/
-        let currentChar = passwords[0].value[passwords[0].value.length - 1];
-        if (/[a-z]/.test(currentChar)) {
-            p[1].style.color = "green"
-        } else if (/[0-9]/.test(currentChar)) {
-            p[2].style.color = "green"
-        } else if (/[A-Z]/.test(currentChar)) {
-            p[0].style.color = "green"
-        } else if (/[\W]/.test(currentChar)) {
-            p[3].style.color = "green"
-        }
 
-        if (exp.test(passwords[0].value)) {
-            p[4].style.color = "green"
-            passwords[0].style.border = "1px solid green"
-            validate = true;
-        } else {
-            regExp.style.display = "block"
-            passwords[0].style.border = "1px solid red"
-            validate = false;
-        }
-
-    }
 
     form.onsubmit = (e) => {
         if (err.username) {

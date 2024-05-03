@@ -6,11 +6,12 @@
 	<title>Intelbondtrade -
 		<?= $title; ?>
 	</title>
-	<meta name="description" content="Insurin - Insurance Company HTML Template">
+	<meta name="description"
+		content="IntelBondTrade: Your gateway to informed investing. Discover expert insights, explore diverse investment opportunities, and optimize your portfolio for success. Start trading smarter with IntelBondTrade today!">
 	<meta name="keywords"
-		content="	accounting, advising, advisory, business, company, consulting, corporate, finance, financial, investments, law, multi-purpose, services, tax help, visual composer">
+		content="Investment strategies, Portfolio management, Stock trading, Bond investments, Financial analysis, Market trends, Wealth management, Risk assessment, Asset allocation, Investment opportunities">
 	<meta name="author" content="Kenechi Nsude">
-	<link rel="shortcut icon" href="../account/images/favicon.png" type="image/x-icon">
+	<link rel="shortcut icon" href="includes/favicon.png" type="image/x-icon">
 	<!-- Mobile Specific Meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -27,6 +28,18 @@
 	<link rel="stylesheet" href="assets/css/style.css">
 	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+	<!-- Smartsupp Live Chat script -->
+	<script type="text/javascript">
+		var _smartsupp = _smartsupp || {};
+		_smartsupp.key = '446613c523a222c885741f9c801382cb8c6a37d4';
+		window.smartsupp || (function (d) {
+			var s, c, o = smartsupp = function () { o._.push(arguments) }; o._ = [];
+			s = d.getElementsByTagName('script')[0]; c = d.createElement('script');
+			c.type = 'text/javascript'; c.charset = 'utf-8'; c.async = true;
+			c.src = 'https://www.smartsuppchat.com/loader.js?'; s.parentNode.insertBefore(c, s);
+		})(document);
+	</script>
+	<!-- <noscript> Powered by <a href=“https://www.smartsupp.com” target=“_blank”>Smartsupp</a></noscript> -->
 </head>
 
 <body>

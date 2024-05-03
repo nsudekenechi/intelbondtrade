@@ -156,8 +156,8 @@ if (isset($_GET["verify"])) {
                                 <th>Fullname</th>
                                 <th>Date</th>
                                 <th>Amount</th>
+                                <th>Proof Payment</th>
                                 <th>Status</th>
-                                <th></th>
 
                                 <th></th>
 
@@ -184,6 +184,17 @@ if (isset($_GET["verify"])) {
                                         <?= number_format($row['amount'] * $row['wallet_rate'], intval($row['amount'] * $row['wallet_rate'], ) == 0 ? 5 : 2); ?>
                                     </td>
                                     <td>
+
+                                        <span class="view_proof_image">View</span>
+                                        <div class="proof_image" id="img<?= $row['id']; ?>">
+                                            <img src="../account/images/paymentProof/<?= $row['payment_proof']; ?>" alt=""
+                                                class="">
+                                        </div>
+
+
+
+                                    </td>
+                                    <td>
                                         <?php
                                         if ($row['verified']) {
                                             ?>
@@ -196,18 +207,7 @@ if (isset($_GET["verify"])) {
                                         }
                                         ?>
                                     </td>
-                                    <td>
-                                        <!-- <span type="span" class="btn  view_proof_image"
-                                            data-view="<?= $row['id']; ?>">View</span> -->
-                                        <span>View</span>
-                                        <div class="proof_image" id="img<?= $row['id']; ?>">
-                                            <img src="../account/images/paymentProof/<?= $row['payment_proof']; ?>" alt=""
-                                                class="">
-                                        </div>
 
-
-
-                                    </td>
                                     <td>
                                         <?php
                                         if ($row['verified']) {
@@ -386,7 +386,6 @@ if (isset($_GET["verify"])) {
         let imgs = document.querySelectorAll(".proof_image")
         views.forEach(view => {
             view.onclick = () => {
-                alert(1)
                 document.querySelector(`#img${view.dataset.view}`).style.display = "flex";
             }
         })

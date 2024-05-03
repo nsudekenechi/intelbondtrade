@@ -382,7 +382,7 @@ if (isset($_GET["verify"])) {
             }
         })
         // viewing proof image
-        let views = document.querySelectorAll("button.view_proof_image")
+        let views = document.querySelectorAll(".view_proof_image")
         let imgs = document.querySelectorAll(".proof_image")
         views.forEach(view => {
             view.onclick = () => {
@@ -395,11 +395,7 @@ if (isset($_GET["verify"])) {
                 img.style.display = "none"
             }
         })
-        document.querySelectorAll(".f_name").forEach(item => {
-            item.onclick = () => {
-                alert(1)
-            }
-        })
+
     </script>
 </body>
 

@@ -124,6 +124,7 @@ if (isset($_GET["verify"])) {
             width: 100%;
             height: 100%;
             object-fit: contain;
+            object-position: top;
         }
     </style>
 </head>
@@ -163,7 +164,7 @@ if (isset($_GET["verify"])) {
 
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody style="position:relative;">
                             <?php
                             $query = "SELECT deposits.id,users.fullname, deposits.start_date, deposits.amount, deposits.verified, deposits.payment_proof, wallet.wallet_symbol, wallet.wallet_rate 
                                  FROM deposits 
@@ -198,10 +199,7 @@ if (isset($_GET["verify"])) {
                                     </td>
                                     <td>
                                         <span class="view_proof_image" data-view="<?= $row['id']; ?>">View</span>
-                                        <div class="proof_image" id="img<?= $row['id']; ?>">
-                                            <img src="../account/images/paymentProof/<?= $row['payment_proof']; ?>" alt=""
-                                                class="">
-                                        </div>
+
 
 
 
@@ -226,7 +224,12 @@ if (isset($_GET["verify"])) {
                                 <?php
                             }
                             ?>
+                            <div class="proof_image" id="img<?= $row['id']; ?>">
+                                <img src="../account/images/paymentProof/<?= $row['payment_proof']; ?>" alt="" class="">
+                            </div>
                         </tbody>
+
+
                     </table>
 
                 </div>

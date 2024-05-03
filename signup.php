@@ -106,26 +106,21 @@ include_once ("./includes/header.php");
     let p = document.querySelectorAll("#regExp p")
 
     // Validating strong password
-    passwords[0].onfocus = () => {
-
-    }
-    passwords[0].onblur = () => {
-        regExp.style.display = "none"
-    }
 
 
 
     form.onsubmit = (e) => {
+        validate = true;
         if (err.username) {
             checkErr(username);
             usernameErr.innerHTML = "Username already Exists";
-            return false;
+            validate = false;
         }
 
         if (err.email) {
             checkErr(email);
             emailErr.innerHTML = "Email already Exists";
-            return false;
+            validate = false;
         }
 
 
@@ -133,12 +128,10 @@ include_once ("./includes/header.php");
         if (passwords[0].value != passwords[1].value) {
             checkErr(passwords[1])
             passwordErr.innerHTML = "Passwords do not match"
-            return false;
+            validate = false;
         }
 
-        if (!validate) {
-            return false;
-        }
+        return validate;
 
 
     }

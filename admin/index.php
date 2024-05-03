@@ -356,7 +356,7 @@ if (isset($_GET["verify"])) {
                                         $amountDeposited = $qres->fetch_column();
 
                                         ?>
-                                    <td>$<?= number_format($amountDeposited, 2); ?></td>
+                                        $<?= number_format($amountDeposited, 2); ?>
                                     </td>
                                 </tr>
                                 <?php

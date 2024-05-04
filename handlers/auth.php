@@ -27,11 +27,6 @@ if (isset($_POST["signUp"])) {
         $refUserId = $res->fetch_column();
         $query = "INSERT INTO referrals (user, ref_user, date) VALUES ('$user', '$refUserId','$date')";
         $res = mysqli_query($conn, $query);
-
-        // Sending user notification
-        // $msg = "Your referral $refUser just signed in";
-        // $query = "INSERT INTO notifications (user, message, time) VALUES ('$user', '$msg', '$date') ";
-        $res = mysqli_query($conn, $query);
         session_destroy();
     }
 

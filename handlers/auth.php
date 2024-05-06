@@ -31,11 +31,13 @@ if (isset($_POST["signUp"])) {
     }
 
     if ($res) {
-        $msg = html_entity_decode("<p style='margin-bottom: 25px;'>
-        Welcome to Intelbondtrade, we're pleased to have you here, below is your login details, please keep your password private.
+        $msg = html_entity_decode("
+        <p style='margin-bottom: 10px;'>
+        Welcome to Intelbondtrade! We're thrilled to have you onboard and excited to embark on this investment journey together.
         </p>
-        <p>
-           Your username is $username and password is $password
+
+        <p style='margin-bottom: 10px;'>
+        To get started, simply log in to your account using the credentials you entered and explore all that Intelbondtrade has to offer. And if you ever have any questions or need assistance, don't hesitate to reach out to our customer support team.
         </p>
         <a href='https://intelbondtrade.ltd/login.php' style='background-color:#6576ff;border-radius:4px;color:#ffffff;display:inline-block;font-size:13px;font-weight:600;line-height:44px;text-align:center;text-decoration:none;text-transform: uppercase; padding: 0 30px'>Login</a>
         ");
@@ -46,10 +48,7 @@ if (isset($_POST["signUp"])) {
             ["{type}", "{user}", "{body}", "{date}"],
             ["", $username, $msg, date("Y")]
         );
-        if ($send) {
-            header("Location: ../login.php");
-        }
-
+        header("Location: ../login.php");
     } else {
         header("Location: ../signup.php");
     }

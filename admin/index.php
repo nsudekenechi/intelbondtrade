@@ -50,7 +50,7 @@ if (isset($_GET["verify"])) {
         if ($res->num_rows > 0) {
             $row = $res->fetch_assoc();
             $msg = html_entity_decode(" <p style='margin-bottom: 10px;'> Your withdrawal request have been verified successfully.</p>  <p style='margin-bottom: 10px;'>You can check your wallet</p>");
-            $send = sendEmail($row["email"], "Withdrawal Verified", "./email.html", ["{request type}", "{name}", "{body}", "{date}"], ["Withdrawal", $row["username"], $msg, date("Y")]);
+            $send = sendEmail($row["email"], "Withdrawal Verified", "../email.html", ["{request type}", "{name}", "{body}", "{date}"], ["Withdrawal", $row["username"], $msg, date("Y")]);
             if ($send) {
                 $query = "UPDATE withdrawal SET verified = true WHERE id = '$id'";
                 $res = mysqli_query($conn, $query);

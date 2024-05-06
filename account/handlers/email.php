@@ -13,7 +13,7 @@ function sendEmail($to, $subject, $emailFile, $search, $replace)
         $mail = new PHPMailer(true);
 
         $senderemail = $_ENV["SENDER_EMAIL"];
-
+        $senderFrom = "Intelbondtrade";
         $senderpassword = $_ENV["SENDER_PASSWORD"];
         $body = file_get_contents($emailFile);
         $body = str_replace($search, $replace, $body);
@@ -26,7 +26,7 @@ function sendEmail($to, $subject, $emailFile, $search, $replace)
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail->Port = 465;
 
-        $mail->SetFrom('admin@intelbondtrade.ltd', 'intelbondtrade.ltd');
+        $mail->setFrom($senderemail, $senderFrom);
         $mail->addAddress($to);
         $mail->Subject = $subject;
         $mail->Body = $body;

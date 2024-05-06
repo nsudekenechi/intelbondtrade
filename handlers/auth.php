@@ -46,7 +46,10 @@ if (isset($_POST["signUp"])) {
             ["{type}", "{user}", "{body}", "{date}"],
             ["", $username, $msg, date("Y")]
         );
-        header("Location: ../login.php");
+        if ($send) {
+            header("Location: ../login.php");
+        }
+
     } else {
         header("Location: ../signup.php");
     }

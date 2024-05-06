@@ -20,16 +20,16 @@ function sendEmail($to, $subject, $emailFile, $search, $replace)
         $senderFrom = "Intelbondtrade";
         $body = file_get_contents($emailFile);
         $body = str_replace($search, $replace, $body);
-        $mail->SMTPDebug = 2;
+        $mail->SMTPDebug = 0;
         $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com;';
+        $mail->Host = 'intelbondtrade.ltd';
         $mail->SMTPAuth = true;
         $mail->Username = $senderemail;
         $mail->Password = $senderpassword;
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail->Port = 465;
 
-        $mail->setFrom('Intelbondtrade@support.com', $senderFrom);
+        $mail->setFrom($senderemail, $senderFrom);
         $mail->addAddress($to);
         $mail->Subject = $subject;
         $mail->Body = $body;

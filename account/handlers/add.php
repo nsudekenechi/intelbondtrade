@@ -41,27 +41,44 @@ if (isset($_POST["verify_deposit"])) {
             $amount = number_format($amount, intval($amount) == 0 ? 5 : 2);
             $walletType = $row['wallet_code'];
 
-            $msg = html_entity_decode(" <p style='margin-bottom: 10px;'> This is to inform you that $username deposited $amount into your $walletType wallet</p>  <p style='margin-bottom: 10px;'>Please verify deposit and confirm payment from your dashboard </p>");
             // sending email to admin  
-            $query = "SELECT email,username FROM users WHERE admin = true";
+            $query = "SELECT email,username FROM users WHERE admin = true OR id='$user'";
             $res = mysqli_query($conn, $query);
-            $row = $res->fetch_assoc();
+            while ($row = $res->fetch_assoc()) {
+                if ($row["username"] != "admin") {
+                    // sending email to user  
+                    $query = "SELECT email,username FROM users WHERE id = '$user'";
+                    $res = mysqli_query($conn, $query);
+                    $row = $res->fetch_assoc();
 
+                    $msg = html_entity_decode(" <p style='margin-bottom: 10px;'>I hope this message finds you well. We are writing to confirm that we have received your deposit request in the amount of $amount $walletType.</p>
+                <p style='margin-bottom: 10px;'> Our team is currently processing your request, and we will update your account accordingly once the deposit has been successfully verified.</p>
+                <p style='margin-bottom: 10px;'>  Should you have any questions or require further assistance, please feel free to reach out to our support team at support@intelbondtrade.ltd.</p>
+                ");
 
-            $send = sendEmail($row["email"], "Deposit Request", "../../admin/email.html", ["{request type}", "{name}", "{body}", "{date}"], ["Deposit", $row["username"], $msg, date("Y")]);
-            // sending email to user  
+                    $send = sendEmail($row["email"], "Confirmation of Deposit Request Received", "../../admin/email.html", ["{request type}", "{name}", "{body}", "{date}"], ["Deposit", $row["username"], $msg, date("Y")]);
+                } else {
+                    $msg = html_entity_decode("
+                    <p style='margin-bottom:10px;'>This is to alert you that a deposit request has been submitted by a user, details of the deposit requests are as follows:</p>
+                  <ul style='margin-bottom:10px;'>
+                    <li>User: $username</li>
+                    <li>Amount: $amount $walletType</li>
+                  </ul>
+                    <p>
+                    Please promptly review, process and ensure all necessary verifications are completed before updating the user's account.
+                    </p>
+                    <p style='margin-bottom: 10px;'>  Should you have any questions or require further assistance, please feel free to reach out to our support team at support@intelbondtrade.ltd.</p>
+                    ");
 
-            $msg = html_entity_decode(" <p style='margin-bottom: 10px;'> You just deposited $amount</p>  <p style='margin-bottom: 10px;'>Your account would be updated once payment is verified </p>");
-
-            $query = "SELECT email,username FROM users WHERE id = '$user'";
-            $res = mysqli_query($conn, $query);
-            $row = $res->fetch_assoc();
-
-            $send = sendEmail($row["email"], "Deposit Request", "../../admin/email.html", ["{request type}", "{name}", "{body}", "{date}"], ["Deposit", $row["username"], $msg, date("Y")]);
+                    $send = sendEmail($row["email"], "Confirmation of Deposit Request Received", "../../admin/email.html", ["{request type}", "{name}", "{body}", "{date}"], ["Deposit", $row["username"], $msg, date("Y")]);
+                }
+            }
 
             if ($send) {
                 header("Location: ../invest-form.php?plan=$plan&verified=s");
+
             }
+
         } else {
             header("Location: ../invest-form.php?plan=$plan&verified=f");
         }

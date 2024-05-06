@@ -162,6 +162,7 @@ include_once ("./includes/header.php");
         elem.onblur = (e) => {
             if (elem.value.length > 0) {
                 fetch(`./handlers/auth.php?${endpoint}=${elem.value}`).then(res => res.text()).then((data) => {
+                    console.log(data)
                     if (data) {
                         err[e.target.name] = true;
                     } else {

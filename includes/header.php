@@ -40,18 +40,13 @@
 			c.src = 'https://www.smartsuppchat.com/loader.js?'; s.parentNode.insertBefore(c, s);
 		})(document);
 	</script>
-	<style>
-		/* .VIpgJd-ZVi9od-ORHb-OEVmcd,
-		.skiptranslate {
-			display: none;
-		} */
-	</style>
 </head>
 
 <body>
 
 	<?php
 	require_once ("./db/db_connect.php");
+	require_once (__DIR__ . "/googleTranslate.php");
 	if (isset($_GET["ref"])) {
 		session_start();
 		$_SESSION["ref"] = $_GET["ref"];

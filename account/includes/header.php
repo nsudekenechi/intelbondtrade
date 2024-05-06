@@ -48,11 +48,16 @@ if ($res->num_rows <= 0) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"
         integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 </head>
 
 <body class="nk-body npc-invest bg-lighter ">
 
     <div class="nk-app-root">
+        <?php
+        require_once ("../includes/googleTranslate.php");
+
+        ?>
         <!-- wrap @s -->
         <div class="nk-wrap ">
             <!-- main header @s -->
@@ -242,14 +247,14 @@ if ($res->num_rows <= 0) {
                                                             item.remove()
                                                         })
                                                         document.querySelector(".nk-notification").innerHTML = `
-                                                                                                                                                                                                                                                                                                                                    <div class="nk-notification-item dropdown-inner">
-                                                                                                                                                                                                                                                                                                                                                                    <div class="nk-notification-content">
-                                                                                                                                                                                                                                                                                                                                                                        <div class="nk-notification-text">
-                                                                                                                                                                                                                                                                                                                                                                        No Notifcations
-                                                                                                                                                                                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                                                                                                                    `
+                                                                                                                                                                                                                                                                                                                                                                                <div class="nk-notification-item dropdown-inner">
+                                                                                                                                                                                                                                                                                                                                                                                                                <div class="nk-notification-content">
+                                                                                                                                                                                                                                                                                                                                                                                                                    <div class="nk-notification-text">
+                                                                                                                                                                                                                                                                                                                                                                                                                    No Notifcations
+                                                                                                                                                                                                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                                                                                                                                                                `
                                                     })
                                                 }
                                             </script>
@@ -381,7 +386,7 @@ if ($res->num_rows <= 0) {
                         </div><!-- .nk-header-tools -->
                     </div><!-- .nk-header-wrap -->
                 </div><!-- .container-fliud -->
-                <div id="google_translate_element" class="py-2 px-5"></div>
+
 
             </div>
             <!-- main header @e -->

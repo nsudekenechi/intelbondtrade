@@ -21,7 +21,7 @@ try {
     $mail->Port = 465;
 
     $mail->SetFrom($senderemail, 'intelbondtrade.ltd');
-    $mail->addAddress("alabahmusic@gmail.com");
+    $mail->addAddress("princetalentd@gmail.com");
     $mail->Subject = "Confirmation of Deposit Request: $50.00 Received";
     $mail->Body = "Dear Alabah,
 

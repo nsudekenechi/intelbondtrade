@@ -48,9 +48,7 @@ if (isset($_POST["verify_deposit"])) {
             $msg = html_entity_decode("
             <p style='margin-bottom:10px;'>This is to alert you that a deposit request has been submitted by a user, details of the deposit requests are as follows:</p>
             <div style='margin-bottom:10px;'>
-            <p>User: $username</p>
-            <p>Amount: $amount $walletType</p>
-            </div>
+          
             <p>
             Please promptly review, process and ensure all necessary verifications are completed before updating the user's account.
             </p>
@@ -65,7 +63,7 @@ if (isset($_POST["verify_deposit"])) {
                 $res = mysqli_query($conn, $query);
                 $row = $res->fetch_assoc();
 
-                $msg = html_entity_decode(" <p style='margin-bottom: 10px;'>I hope this message finds you well. We are writing to confirm that we have received your deposit request in the amount of $amount $walletType.</p>
+                $msg = html_entity_decode(" <p style='margin-bottom: 10px;'>I hope this message finds you well. We are writing to confirm that we have received your deposit request.</p>
                 <p style='margin-bottom: 10px;'> Our team is currently processing your request, and we will update your account accordingly once the deposit has been successfully verified.</p>
                 <p style='margin-bottom: 10px;'>  Should you have any questions or require further assistance, please feel free to reach out to our support team at support@intelbondtrade.ltd.</p>
                 ");

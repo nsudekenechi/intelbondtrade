@@ -40,7 +40,12 @@
 			c.src = 'https://www.smartsuppchat.com/loader.js?'; s.parentNode.insertBefore(c, s);
 		})(document);
 	</script>
-
+	<style>
+		/* .VIpgJd-ZVi9od-ORHb-OEVmcd,
+		.skiptranslate {
+			display: none;
+		} */
+	</style>
 </head>
 
 <body>
@@ -129,12 +134,12 @@
 						</div>
 						<!-- /Mobile-Menu -->
 					</div>
-					<div id="google_translate_element"></div>
+
 				</div>
 			</div>
 
 
-
+			<div id="google_translate_element" class="py-2 px-5"></div>
 		</header>
 		<!-- search filed -->
 		<div class="search-body">
@@ -150,6 +155,7 @@
 				</div>
 			</div>
 		</div>
+
 		<!-- End of header section
 	============================================= -->
 		<?php

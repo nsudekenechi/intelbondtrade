@@ -20,6 +20,14 @@ include_once ("./includes/header.php");
             transform: translateX(0px);
         }
     }
+
+    body {
+        top: 0px !important;
+    }
+
+    .skiptranslate {
+        display: none;
+    }
 </style>
 <section id="in-faq-contact" class="in-faq-contact-section" style="padding:0px;">
     <div class="in-faq-contact-content" style="background-color: white;">
@@ -32,6 +40,8 @@ include_once ("./includes/header.php");
             <div class="col-12 col-lg-7" style="padding:0px;">
                 <div class="in-faq-contact-form-area" style="margin:0px; height:100%;">
                     <div class="container">
+                        <div id="google_translate_element" class="py-2 px-2 d-none"></div>
+
                         <div class="in-faq-contact-info-title headline pera-content">
                             <h3>Sign Up </h3>
                             <p>Get started with Intelbondtrade by creating an account

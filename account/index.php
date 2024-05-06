@@ -2,7 +2,6 @@
 
 $title = "Home";
 require_once "./includes/header.php";
-
 ?>
 <!-- content @s -->
 <div class="nk-content nk-content-lg nk-content-fluid">
@@ -24,6 +23,7 @@ require_once "./includes/header.php";
                             </div>
                             <div class="nk-block-des">
                                 <p id="message"></p>
+
                             </div>
                         </div><!-- .nk-block-head-content -->
                         <div class="nk-block-head-content d-none d-md-block">
@@ -434,6 +434,7 @@ require_once "./includes/header.php";
         </div>
     </div>
 </div>
+
 <!-- content @e -->
 <script>
     let greeting = document.querySelector("#greeting");

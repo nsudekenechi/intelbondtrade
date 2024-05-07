@@ -35,7 +35,7 @@ require_once "./includes/header.php";
                                       deposits 
                                       JOIN plans
                                       ON deposits.plan = plans.id
-                                      WHERE deposits.user='$userid' AND deposits.active = true LIMIT 6";
+                                      WHERE deposits.user='$userid' AND deposits.active = true AND deposits.verified = true LIMIT 6";
                                 $res = mysqli_query($conn, $query);
                                 $currDate = new DateTime(date('d-M-Y'));
                                 if ($res->num_rows > 0) {

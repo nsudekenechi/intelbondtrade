@@ -25,8 +25,8 @@ function sendEmail($to, $subject, $emailFile, $search, $replace)
         $mail->Password = $senderpassword;
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail->Port = 465;
-
         $mail->setFrom($senderemail, $senderFrom);
+        $mail->clearAddresses();
         $mail->addAddress($to);
         $mail->Subject = $subject;
         $mail->Body = $body;

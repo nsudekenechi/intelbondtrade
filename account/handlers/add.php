@@ -42,62 +42,37 @@ if (isset($_POST["verify_deposit"])) {
             $walletType = $row['wallet_code'];
 
             // sending email to admin  
-            $query = "SELECT email,username FROM users WHERE admin = true";
+            $query = "SELECT id,email,username,admin FROM users WHERE admin = true OR id='$user'";
             $res = mysqli_query($conn, $query);
-            $row = $res->fetch_assoc();
-            $msg = html_entity_decode("
-            <p style='margin-bottom:10px;'>This is to alert you that a deposit request has been submitted by a user, details of the deposit requests are as follows:</p>
-            <div style='margin-bottom:10px;'>
-          
-            <p>
-            Please promptly review, process and ensure all necessary verifications are completed before updating the user's account.
-            </p>
-            <p style='margin-bottom: 10px;'>  Should you have any questions or require further assistance, please feel free to reach out to our support team at support@intelbondtrade.ltd.</p>
-            ");
-            $body = file_get_contents("../../email.html");
-            $body = str_replace(["{type}", "{user}", "{body}", "{date}"], ["Deposit Request", $row["username"], $msg, date("Y")], $body);
-            // sending mail to user
-            $headers = "MIME-Version: 1.0" . "\r\n";
-            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-            $from = $_ENV["SENDER_EMAIL"];
-            // Additional headers
-            $headers .= 'From: ' . $fromName . '<' . $from . '>' . "\r\n";
-            mail($row["email"], "Confirmation of Deposit Request Received", $body, $headers);
-
-            $query = "SELECT email,username FROM users WHERE id='$user'";
-            $res = mysqli_query($conn, $query);
-            $row = $res->fetch_assoc();
-            $msg = html_entity_decode(" <p style='margin-bottom: 10px;'>I hope this message finds you well. We are writing to confirm that we have received your deposit request of $amount $walletType</p>
-            <p style='margin-bottom: 10px;'> Our team is currently processing your request, and we will update your account accordingly once the deposit has been successfully verified.</p>
-        <p style='margin-bottom: 10px;'>  Should you have any questions or require further assistance, please feel free to reach out to our support team at support@intelbondtrade.ltd.</p>
-      ");
-
-            $body = file_get_contents("../../email.html");
-            $body = str_replace(["{type}", "{user}", "{body}", "{date}"], ["Deposit Request", $row["username"], $msg, date("Y")], $body);
-            // Additional headers
-            $headers .= 'From: ' . $fromName . '<' . $from . '>' . "\r\n";
-            mail($row["email"], "Confirmation of Deposit Request Received", $body, $headers);
-            header("Location: ../invest-form.php?plan=$plan&verified=s");
-            // $send = sendEmail($row["email"], "Confirmation of Deposit Request Received", "../../email.html", ["{type}", "{user}", "{body}", "{date}"], ["Deposit Request", $row["username"], $msg, date("Y")]);
-            exit();
-            if ($send) {
-
-                // sending email to user  
-                $query = "SELECT email,username FROM users WHERE id = '$user'";
-                $res = mysqli_query($conn, $query);
-                $row = $res->fetch_assoc();
-
-                $msg = html_entity_decode(" <p style='margin-bottom: 10px;'>I hope this message finds you well. We are writing to confirm that we have received your deposit request.</p>
-                <p style='margin-bottom: 10px;'> Our team is currently processing your request, and we will update your account accordingly once the deposit has been successfully verified.</p>
+            $count = 0;
+            while ($row = $res->fetch_assoc()) {
+                // Message for user
+                if ($row["admin"] != true) {
+                    $msg = html_entity_decode(" <p style='margin-bottom: 10px;'>I hope this message finds you well. We are writing to confirm that we have received your deposit request of $amount $walletType</p>
+                    <p style='margin-bottom: 10px;'> Our team is currently processing your request, and we will update your account accordingly once the deposit has been successfully verified.</p>
                 <p style='margin-bottom: 10px;'>  Should you have any questions or require further assistance, please feel free to reach out to our support team at support@intelbondtrade.ltd.</p>
-                ");
+              ");
 
-                $send = sendEmail($row["email"], "Confirmation of Deposit Request Received", "../../email.html", ["{type}", "{user}", "{body}", "{date}"], ["Deposit Request", $row["username"], $msg, date("Y")]);
-
-                if ($send) {
-                    header("Location: ../invest-form.php?plan=$plan&verified=s");
+                } else {
+                    $msg = html_entity_decode("
+                    <p style='margin-bottom:10px;'>This is to alert you that a deposit request has been submitted by a user, details of the deposit requests are as follows:</p>
+                    <div style='margin-bottom:10px;'>
+                  
+                    <p>
+                    Please promptly review, process and ensure all necessary verifications are completed before updating the user's account.
+                    </p>
+                    <p style='margin-bottom: 10px;'>  Should you have any questions or require further assistance, please feel free to reach out to our support team at support@intelbondtrade.ltd.</p>
+                    ");
                 }
+                $count++;
+                $send = sendEmail($row["email"], "Confirmation Of Deposit Request", "../../email.html", ["{type}", "{user}", "{body}", "{date}"], ["Deposit Request", $row["username"], $msg, date("Y")]);
+
             }
+
+            if ($count == $res->num_rows) {
+                header("Location: ../invest-form.php?plan=$plan&verified=s");
+            }
+
 
         } else {
             header("Location: ../invest-form.php?plan=$plan&verified=f");
@@ -124,33 +99,27 @@ if (isset($_POST["withdrawal"])) {
     $amount = number_format($amount, intval($amount) == 0 ? 5 : 2);
     $walletType = $row['wallet_code'];
 
-    $msg = html_entity_decode(" <p style='margin-bottom: 10px;'> This is to inform you that $username wants to withdraw $amount to their $walletType wallet</p>  <p style='margin-bottom: 10px;'>Check your dashboard for more details about the withdrawal</p>");
-
 
     // sending email to admin
-    $query = "SELECT email,username FROM users WHERE admin = true";
-    $res = mysqli_query($conn, $query);
-    $row = $res->fetch_assoc();
+    while ($row = $res->fetch_assoc()) {
+        // Message for user
+        if ($row["admin"] != true) {
+            $msg = html_entity_decode(" <p style='margin-bottom: 10px;'> Thank you for your withdrawal request. We're processing it promptly. </p>  <p style='margin-bottom: 10px;'>You'll receive an email confirmation once the transaction is complete.</p>");
+        } else {
+            $msg = html_entity_decode(" <p style='margin-bottom: 10px;'> This is to inform you that $username wants to withdraw $amount to their $walletType wallet</p>  <p style='margin-bottom: 10px;'>Check your dashboard for more details about the withdrawal</p>");
+        }
+        $count++;
+        $send = sendEmail($row["email"], "Confirmation Of Withdrawal Request", "../../email.html", ["{type}", "{user}", "{body}", "{date}"], ["Deposit Request", $row["username"], $msg, date("Y")]);
 
-    $send = sendEmail($row["email"], "Withdrawal Request", "../../email.html", ["{request type}", "{name}", "{body}", "{date}"], ["Withdrawal", $row["username"], $msg, date("Y")]);
+    }
 
-    $query = "SELECT email,username FROM users WHERE id = '$user'";
-    $res = mysqli_query($conn, $query);
-    $row = $res->fetch_assoc();
-
-    $msg = html_entity_decode(" <p style='margin-bottom: 10px;'> Thank you for your withdrawal request. We're processing it promptly. </p>  <p style='margin-bottom: 10px;'>You'll receive an email confirmation once the transaction is complete.</p>");
-
-    $send = sendEmail($row["email"], " Withdrawal Request Confirmation", "../../email.html", ["{request type}", "{name}", "{body}", "{date}"], ["Withdrawal", $row["username"], $msg, date("Y")]);
 
     // sending email to user
-    if ($send) {
+    if ($count == $res->num_rows) {
         header("Location: ../withdraw.php?withdraw=s");
     } else {
         header("Location: ../withdraw.php?withdraw=f");
     }
-
-
-
 }
 
 

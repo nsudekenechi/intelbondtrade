@@ -46,7 +46,7 @@ if (isset($_POST["signUp"])) {
             "Welcome to Intelbondtrade",
             "../email.html",
             ["{type}", "{user}", "{body}", "{date}"],
-            ["", $username, $msg, date("Y")]
+            ["Welcome to Intelbondtrade", $username, $msg, date("Y")]
         );
         header("Location: ../login.php");
     } else {
@@ -87,7 +87,7 @@ if (isset($_POST["login"])) {
     if ($res->num_rows) {
         $row = $res->fetch_assoc();
 
-        if (password_verify($password, $row["password"])) {
+        if (password_verify($password, $row["password"]) && !$row["suspend"]) {
             $_SESSION["user"] = $row["id"];
             if ($row['admin']) {
                 header("Location: ../admin/");

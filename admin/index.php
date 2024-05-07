@@ -38,57 +38,57 @@ function sendEmail($to, $subject, $emailFile, $search, $replace)
     }
 }
 
-if (isset($_GET["verify"])) {
-    $id = $_GET["verify"];
-    if (isset($_GET["request"])) {
-        $query = "SELECT users.email, users.username  
-        FROM withdrawal 
-        JOIN users 
-        ON withdrawal.user = users.id 
-        WHERE withdrawal.id='$id' AND withdrawal.verified = false";
-        $res = mysqli_query($conn, $query);
-        if ($res->num_rows > 0) {
-            $row = $res->fetch_assoc();
-            $msg = html_entity_decode(" <p style='margin-bottom: 10px;'> Your withdrawal request have been verified successfully.</p>  <p style='margin-bottom: 10px;'>You can check your wallet</p>");
-            $send = sendEmail($row["email"], "Withdrawal Verified", "../email.html", ["{request type}", "{name}", "{body}", "{date}"], ["Withdrawal", $row["username"], $msg, date("Y")]);
-            if ($send) {
-                $query = "UPDATE withdrawal SET verified = true WHERE id = '$id'";
-                $res = mysqli_query($conn, $query);
-            }
-        }
+// if (isset($_GET["verify"])) {
+//     $id = $_GET["verify"];
+//     if (isset($_GET["request"])) {
+//         $query = "SELECT users.email, users.username  
+//         FROM withdrawal 
+//         JOIN users 
+//         ON withdrawal.user = users.id 
+//         WHERE withdrawal.id='$id' AND withdrawal.verified = false";
+//         $res = mysqli_query($conn, $query);
+//         if ($res->num_rows > 0) {
+//             $row = $res->fetch_assoc();
+//             $msg = html_entity_decode(" <p style='margin-bottom: 10px;'> Your withdrawal request have been verified successfully.</p>  <p style='margin-bottom: 10px;'>You can check your wallet</p>");
+//             $send = sendEmail($row["email"], "Withdrawal Verified", "../email.html", ["{request type}", "{name}", "{body}", "{date}"], ["Withdrawal", $row["username"], $msg, date("Y")]);
+//             if ($send) {
+//                 $query = "UPDATE withdrawal SET verified = true WHERE id = '$id'";
+//                 $res = mysqli_query($conn, $query);
+//             }
+//         }
 
 
-    } else {
-        $query = "SELECT deposits.amount, deposits.user  FROM deposits JOIN users ON deposits.user=users.id WHERE deposits.id = '$id'";
-        $res = mysqli_query($conn, $query);
-        $row = $res->fetch_assoc();
-        $amount = $row['amount'];
-        $user = $row['user'];
-        // Updating users account
-        $query = "UPDATE users SET balance = balance + $amount, invested = invested + $amount WHERE id='$user'";
-        $res = mysqli_query($conn, $query);
-        // Verifying deposit
-        $query = "UPDATE deposits SET verified = true WHERE id = '$id'";
-        $res = mysqli_query($conn, $query);
-        // Checking if user was reffered so we add 10% to the user who referred him
-        $query = "SELECT  user FROM referrals WHERE ref_user='$user' AND ref_earned  = 0";
-        $res = mysqli_query($conn, $query);
+//     } else {
+//         $query = "SELECT deposits.amount, deposits.user  FROM deposits JOIN users ON deposits.user=users.id WHERE deposits.id = '$id'";
+//         $res = mysqli_query($conn, $query);
+//         $row = $res->fetch_assoc();
+//         $amount = $row['amount'];
+//         $user = $row['user'];
+//         // Updating users account
+//         $query = "UPDATE users SET balance = balance + $amount, invested = invested + $amount WHERE id='$user'";
+//         $res = mysqli_query($conn, $query);
+//         // Verifying deposit
+//         $query = "UPDATE deposits SET verified = true WHERE id = '$id'";
+//         $res = mysqli_query($conn, $query);
+//         // Checking if user was reffered so we add 10% to the user who referred him
+//         $query = "SELECT  user FROM referrals WHERE ref_user='$user' AND ref_earned  = 0";
+//         $res = mysqli_query($conn, $query);
 
-        if ($res->num_rows > 0) {
-            $profit = $amount * (10 / 100);
-            $referrer = $res->fetch_column();
-            $query = "UPDATE users SET balance = balance + $profit WHERE id='$referrer'";
-            $res = mysqli_query($conn, $query);
+//         if ($res->num_rows > 0) {
+//             $profit = $amount * (10 / 100);
+//             $referrer = $res->fetch_column();
+//             $query = "UPDATE users SET balance = balance + $profit WHERE id='$referrer'";
+//             $res = mysqli_query($conn, $query);
 
-            $query = "UPDATE referrals  SET ref_earned = $profit WHERE ref_user='$user'";
-            $res = mysqli_query($conn, $query);
-        }
-    }
+//             $query = "UPDATE referrals  SET ref_earned = $profit WHERE ref_user='$user'";
+//             $res = mysqli_query($conn, $query);
+//         }
+//     }
 
-    if ($res) {
-        header("Location: ./index.php");
-    }
-}
+//     if ($res) {
+//         header("Location: ./index.php");
+//     }
+// }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -129,6 +129,13 @@ if (isset($_GET["verify"])) {
 </head>
 
 <body>
+    <?php
+    if (isset($_POST["verify"])) {
+        ?>
+        <script>alert(1)</script>
+        <?php
+    }
+    ?>
     <div class="container py-5">
         <ul class="nav nav-tabs">
             <li class="nav-item">
@@ -145,7 +152,11 @@ if (isset($_GET["verify"])) {
                     <span>Referrals</span>
                 </a>
             </li>
-
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#tabItem8"><em class="icon ni ni-users"></em>
+                    <span>Suspend User</span>
+                </a>
+            </li>
         </ul>
         <div class="tab-content">
             <div class="tab-pane active" id="tabItem5">
@@ -216,8 +227,9 @@ if (isset($_GET["verify"])) {
                                             <?php
                                         } else {
                                             ?>
-                                            <a href="./index.php?verify=<?= $row['id']; ?>"
-                                                class="btn btn-sm btn-primary">Verify</a>
+                                            <input type="text" name="deposit" value="<?= $row["id"]; ?>" hidden>
+                                            <button class="btn btn-sm btn-primary verify_deposit"
+                                                name="verify_deposit">Verify</button>
                                             <?php
                                         }
                                         ?>
@@ -301,8 +313,9 @@ if (isset($_GET["verify"])) {
                                                 <?php
                                             } else {
                                                 ?>
-                                                <a href="./index.php?verify=<?= $row['id']; ?>&request=withdrawal"
-                                                    class="btn btn-sm btn-primary">Verify</a>
+                                                <input type="text" name="withdraw" value="<?= $row["id"]; ?>" hidden>
+                                                <button class="btn btn-sm btn-primary verify_deposit"
+                                                    name="verify_withdraw">Verify</button>
                                                 <?php
                                             }
                                             ?>
@@ -367,6 +380,56 @@ if (isset($_GET["verify"])) {
                     </table>
                 </div>
             </div>
+
+            <div class="tab-pane" id="tabItem8">
+                <div class="table-responsive">
+                    <table class="datatable-init table">
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Fullname</th>
+                                <th>Email</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $query = "SELECT id,username,fullname, email,suspend FROM users WHERE admin=false";
+                            $res = mysqli_query($conn, $query);
+                            while ($row = $res->fetch_assoc()) {
+                                ?>
+                                <tr>
+                                    <td><?= $row['username']; ?></td>
+                                    <td><?= $row['fullname']; ?></td>
+                                    <td><?= $row['email']; ?></td>
+                                    <td>
+
+                                        <input type="text" name="user" value="<?= $row["id"]; ?>" hidden>
+                                        <?php
+                                        if (!$row["suspend"]) {
+                                            ?>
+                                            <button class="btn btn-sm btn-danger verify_deposit" name="suspend_user">
+                                                Suspend
+                                            </button>
+                                            <?php
+                                        } else {
+                                            ?>
+                                            <button class="btn btn-sm btn-primary verify_deposit" name="suspend_user">
+                                                Unsuspend
+                                            </button>
+                                            <?php
+                                        }
+                                        ?>
+                                    </td>
+                                </tr>
+                                <?php
+                            }
+                            ?>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
 
     </div>
@@ -374,13 +437,6 @@ if (isset($_GET["verify"])) {
     <script src="../account/assets/js/scripts.js?ver=3.2.2"></script>
     <!-- <script src="../account/js/libs/datatable-btns.js?ver=3.2.2"></script> -->
     <script>
-        let verify = document.querySelectorAll("a[href].btn");
-        verify.forEach(item => {
-            item.onclick = () => {
-                item.innerHTML = `<span class="spinner-border spinner-border-sm ml-2" role="status"
-                                                aria-hidden="true"></span> `
-            }
-        })
         // viewing proof image
         let views = document.querySelectorAll(".view_proof_image")
         let imgs = document.querySelectorAll(".proof_image")
@@ -394,7 +450,52 @@ if (isset($_GET["verify"])) {
                 img.style.display = "none"
             }
         })
+        let depositVerifyButtons = document.querySelectorAll(".verify_deposit");
+        depositVerifyButtons.forEach(btn => {
+            let submitting = false;
 
+            btn.onclick = (e) => {
+                // Storing innerHTML of suspend user button, to know whether to display suspend or unsuspend when user clicks on button
+                let suspendUserContent = "";
+                if (btn.name == "suspend_user") {
+                    suspendUserContent = btn.innerHTML;
+                }
+
+                if (submitting) {
+                    e.preventDefault();
+                }
+                btn.innerHTML = `<span class="spinner-border spinner-border-sm ml-2" role="status"  aria-hidden="true"></span>`
+                submitting = true;
+                fetch(`./handler.php?${btn.name}=${btn.previousElementSibling.value}`).then(res => res.text()).then(data => {
+                    if (data) {
+                        // Verifying deposit
+                        if (btn.name == "verify_deposit") {
+                            btn.innerHTML = "Verified";
+                            btn.classList.replace("btn-primary", "btn-success")
+                            let span = btn.parentElement.previousElementSibling.querySelector("span");
+                            span.innerHTML = "Complete";
+                            span.classList.replace("bg-warning", "bg-success");
+                        } else if (btn.name == "verify_withdraw") {
+                            btn.innerHTML = "Verified";
+                            btn.classList.replace("btn-primary", "btn-success")
+                        } else if (btn.name == "suspend_user") {
+                            if (suspendUserContent.trim() == "Suspend") {
+                                btn.innerHTML = "Unsuspend";
+                                btn.classList.replace("btn-danger", "btn-primary")
+                            } else {
+                                btn.innerHTML = "Suspend";
+                                btn.classList.replace("btn-primary", "btn-danger")
+                            }
+                        }
+
+                    }
+                })
+
+
+
+
+            }
+        })
     </script>
 </body>
 

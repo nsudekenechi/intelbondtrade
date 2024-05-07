@@ -33,10 +33,11 @@ if (isset($_POST["verify_deposit"])) {
         $res = mysqli_query($conn, $query);
         if ($res) {
             // Getting deposit details
-            $query = "SELECT deposits.amount, users.username, wallet.wallet_rate, wallet.wallet_symbol, wallet.wallet_code FROM deposits JOIN users ON deposits.user = users.id JOIN wallet ON deposits.wallet = wallet.id WHERE deposits.id='$deposit_id'";
+            $query = "SELECT deposits.amount, users.fullname, wallet.wallet_rate, wallet.wallet_symbol, wallet.wallet_code FROM deposits JOIN users ON deposits.user = users.id JOIN wallet ON deposits.wallet = wallet.id WHERE deposits.id='$deposit_id'";
             $res = mysqli_query($conn, $query);
             $row = $res->fetch_assoc();
             $username = $row["username"];
+            $fullname = $row["fullname"];
             $amount = $row['amount'] * $row['wallet_rate'];
             $amount = number_format($amount, intval($amount) == 0 ? 5 : 2);
             $walletType = $row['wallet_code'];
@@ -57,6 +58,9 @@ if (isset($_POST["verify_deposit"])) {
                     $msg = html_entity_decode("
                     <p style='margin-bottom:10px;'>This is to alert you that a deposit request has been submitted by a user, details of the deposit requests are as follows:</p>
                     <div style='margin-bottom:10px;'>
+                    <p>User: $fullname</p>
+                    <p>Amount: $amount $walletType</p>
+                    </div>
                   
                     <p>
                     Please promptly review, process and ensure all necessary verifications are completed before updating the user's account.

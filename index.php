@@ -73,14 +73,14 @@ include_once ("./includes/header.php");
 	<div class="container ">
 		<div class="row py-5" style="column-gap:15%;">
 			<div class="col-md-5  pt-5">
-				<span class="in-text-gradiant animate">Simple and Reliable Investment Options</span>
+				<!-- <span class="in-text-gradiant animate">Simple and Reliable Investment Options</span> -->
 				<h1 class="my-2 animate" style="font-size:2.5rem;">Investment Made <br> <span class="in-text-gradiant">
 						Easy
 					</span> Just For You.</h1>
 				<p>Take control of your financial future with Intelbondtrade. Our innovative approach to wealth
 					management
 					empowers you to maximize returns while minimizing risk.
-					terms. </p>
+				</p>
 				<div class="in-btn-1 wow fadeInUp" data-wow-delay="100ms" data-wow-duration="1000ms"
 					style="visibility: visible; animation-duration: 1000ms; animation-delay: 100ms; animation-name: fadeInUp;">
 					<a href="./signup.php">Create an account </a>

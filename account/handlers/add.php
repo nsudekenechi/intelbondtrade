@@ -54,8 +54,32 @@ if (isset($_POST["verify_deposit"])) {
             </p>
             <p style='margin-bottom: 10px;'>  Should you have any questions or require further assistance, please feel free to reach out to our support team at support@intelbondtrade.ltd.</p>
             ");
+            $body = file_get_contents("../../email.html");
+            $body = str_replace(["{type}", "{user}", "{body}", "{date}"], ["Deposit Request", $row["username"], $msg, date("Y")], $body);
+            // sending mail to user
+            $headers = "MIME-Version: 1.0" . "\r\n";
+            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+            $from = $_ENV["SENDER_EMAIL"];
+            // Additional headers
+            $headers .= 'From: ' . $fromName . '<' . $from . '>' . "\r\n";
+            mail($row["email"], "Confirmation of Deposit Request Received", $body, $headers);
 
-            $send = sendEmail($row["email"], "Confirmation of Deposit Request Received", "../../email.html", ["{type}", "{user}", "{body}", "{date}"], ["Deposit Request", $row["username"], $msg, date("Y")]);
+            $query = "SELECT email,username FROM users WHERE id='$user'";
+            $res = mysqli_query($conn, $query);
+            $row = $res->fetch_assoc();
+            $msg = html_entity_decode(" <p style='margin-bottom: 10px;'>I hope this message finds you well. We are writing to confirm that we have received your deposit request of $amount $walletType</p>
+            <p style='margin-bottom: 10px;'> Our team is currently processing your request, and we will update your account accordingly once the deposit has been successfully verified.</p>
+        <p style='margin-bottom: 10px;'>  Should you have any questions or require further assistance, please feel free to reach out to our support team at support@intelbondtrade.ltd.</p>
+      ");
+
+            $body = file_get_contents("../../email.html");
+            $body = str_replace(["{type}", "{user}", "{body}", "{date}"], ["Deposit Request", $row["username"], $msg, date("Y")], $body);
+            // Additional headers
+            $headers .= 'From: ' . $fromName . '<' . $from . '>' . "\r\n";
+            mail($row["email"], "Confirmation of Deposit Request Received", $body, $headers);
+            header("Location: ../invest-form.php?plan=$plan&verified=s");
+            // $send = sendEmail($row["email"], "Confirmation of Deposit Request Received", "../../email.html", ["{type}", "{user}", "{body}", "{date}"], ["Deposit Request", $row["username"], $msg, date("Y")]);
+            exit();
             if ($send) {
 
                 // sending email to user  

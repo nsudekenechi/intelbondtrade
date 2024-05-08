@@ -274,6 +274,7 @@ function sendEmail($to, $subject, $emailFile, $search, $replace)
                                ORDER BY id DESC";
                             $res = mysqli_query($conn, $query);
                             while ($row = $res->fetch_assoc()) {
+                                $rand = rand(0, 100000);
                                 ?>
                                 <tr>
                                     <td>
@@ -296,10 +297,11 @@ function sendEmail($to, $subject, $emailFile, $search, $replace)
                                             <div class="nk-refwg-url ">
                                                 <div class="form-control-wrap">
 
-                                                    <input type="text" class="form-control copy-text " id="refUrl"
+                                                    <input type="text" class="form-control copy-text " id="refUrl<?= $rand ?>"
                                                         value="<?= $row['wallet_address']; ?>" readonly="">
-                                                    <div class="form-clip clipboard-init" data-clipboard-target="#refUrl"
-                                                        data-success="Copied" data-text="Copy Link"><em
+                                                    <div class="form-clip clipboard-init"
+                                                        data-clipboard-target="#refUrl<?= $rand ?>" data-success="Copied"
+                                                        data-text="Copy Link"><em
                                                             class="clipboard-icon icon ni ni-copy"></em> <span
                                                             class="clipboard-text">Copy Address</span>
                                                     </div>

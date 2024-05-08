@@ -18,6 +18,7 @@ require_once "./includes/header.php";
                 </div><!-- nk-block-head -->
                 <div class="nk-block invest-block">
                     <form action="./handlers/add.php" class="invest-form" method="POST">
+                        <input type="text" name="time" hidden id="time">
                         <div class="row g-gs">
                             <div class="col-lg-7">
 
@@ -274,6 +275,7 @@ require_once "./includes/footer.php";
     amount.onkeyup = () => {
         if (amount.value <= userBalance) {
             balance.innerHTML = Number(userBalance - amount.value).toFixed(2)
+            withdrawal.disabled = false;
         } else {
             withdrawal.disabled = true
         }
@@ -290,4 +292,6 @@ require_once "./includes/footer.php";
         withdrawal.innerHTML = `<span class="spinner-border spinner-border-sm ml-2" role="status"
                                                 aria-hidden="true"></span> Processing`
     }
+    let time = new Date().toLocaleTimeString("en-us", { hour12: true, timeStyle: "short" });
+    document.querySelector("#time").value = time;
 </script>

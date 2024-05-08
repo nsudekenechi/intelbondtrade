@@ -87,7 +87,7 @@ if (isset($_POST["verify_deposit"])) {
 // Withdrawal
 if (isset($_POST["withdrawal"])) {
     extract($_POST);
-    $date = date("d-M-Y h:i A");
+    $date = date("d-M-Y ") . $time;
     $query = "INSERT INTO withdrawal (wallet_address, wallet_type, amount, user,date) VALUES ('$wallet_address',  '$wallet_type', '$amount', '$user', '$date')";
     $res = mysqli_query($conn, $query);
 

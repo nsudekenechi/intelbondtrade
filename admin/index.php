@@ -164,13 +164,15 @@ function sendEmail($to, $subject, $emailFile, $search, $replace)
                     <table class="datatable-init table">
                         <thead>
                             <tr>
+                                <th>Proof Payment</th>
+                                <th></th>
+
                                 <th>Fullname</th>
                                 <th>Date</th>
                                 <th>Amount</th>
-                                <th>Proof Payment</th>
+
                                 <th>Status</th>
 
-                                <th></th>
 
                             </tr>
                         </thead>
@@ -186,15 +188,6 @@ function sendEmail($to, $subject, $emailFile, $search, $replace)
                                 ?>
                                 <tr>
                                     <td>
-                                        <span class="f_name"> <?= $row['fullname']; ?></span>
-                                    </td>
-                                    <td>
-                                        <?= $row['start_date']; ?>
-                                    </td>
-                                    <td>
-                                        <?= number_format($row['amount'] * $row['wallet_rate'], intval($row['amount'] * $row['wallet_rate'], ) == 0 ? 5 : 2); ?>
-                                    </td>
-                                    <td>
 
                                         <span class="view_proof_image" data-view="<?= $row['id']; ?>">View</span>
                                         <div class="proof_image" id="img<?= $row['id']; ?>">
@@ -205,20 +198,6 @@ function sendEmail($to, $subject, $emailFile, $search, $replace)
 
 
                                     </td>
-                                    <td>
-                                        <?php
-                                        if ($row['verified']) {
-                                            ?>
-                                            <span class="badge badge-dot bg-success">Complete</span>
-                                            <?php
-                                        } else {
-                                            ?>
-                                            <span class="badge badge-dot bg-warning">Pending</span>
-                                            <?php
-                                        }
-                                        ?>
-                                    </td>
-
                                     <td>
                                         <?php
                                         if ($row['verified']) {
@@ -234,6 +213,31 @@ function sendEmail($to, $subject, $emailFile, $search, $replace)
                                         }
                                         ?>
                                     </td>
+
+                                    <td>
+                                        <span class="f_name"> <?= $row['fullname']; ?></span>
+                                    </td>
+                                    <td>
+                                        <?= $row['start_date']; ?>
+                                    </td>
+                                    <td>
+                                        <?= number_format($row['amount'] * $row['wallet_rate'], intval($row['amount'] * $row['wallet_rate'], ) == 0 ? 5 : 2); ?>
+                                    </td>
+
+                                    <td>
+                                        <?php
+                                        if ($row['verified']) {
+                                            ?>
+                                            <span class="badge badge-dot bg-success">Complete</span>
+                                            <?php
+                                        } else {
+                                            ?>
+                                            <span class="badge badge-dot bg-warning">Pending</span>
+                                            <?php
+                                        }
+                                        ?>
+                                    </td>
+
 
 
                                 </tr>
@@ -305,7 +309,7 @@ function sendEmail($to, $subject, $emailFile, $search, $replace)
                                     </td>
 
                                     <td>
-                                        <div class="tb-odr-btns d-none d-md-inline">
+                                        <div class="tb-odr-btns  d-md-inline">
                                             <?php
                                             if ($row['verified']) {
                                                 ?>

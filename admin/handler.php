@@ -69,11 +69,13 @@ if (isset($_GET["verify_deposit"])) {
         $query = "UPDATE referrals  SET ref_earned = $profit WHERE ref_user='$user'";
         $res = mysqli_query($conn, $query);
     }
-
-    $msg = html_entity_decode(" 
-I hope this email finds you well.
-
-I'm writing to confirm that we have received your recent deposit. Thank you for choosing to invest with us. Your transaction has been successfully processed, and the funds are now credited to your account. ");
+    // $query = "SELECT wallet.wallet_code,wallet.wallet_rate,deposits.amount FROM deposits JOIN wallet ON deposits.wallet=wallet.id WHERE deposits.id='$id'";
+    // $res = mysqli_query($conn, $query);
+    // $row = $res->fetch_assoc();
+    // $amount = $row['amount'] * $row['wallet_rate'];
+    // $amount = number_format($amount, intval($amount) == 0 ? 5 : 2) . " " . $row["wallet_code"];
+    $amount = number_format($amount, 2);
+    $msg = html_entity_decode("Your deposit of $$amount has been successfully processed and funds are now credited to your account. Thank you for investing with us.");
     $search = ["{type}", "{user}", "{body}", "{date}"];
     $replace = ["Deposit Request Verified", $username, $msg, date("Y")];
     $send = sendEmail($email, "Deposit Confirmed", "../email.html", $search, $replace);
@@ -92,19 +94,21 @@ if (isset($_GET["verify_withdraw"])) {
     $query = "UPDATE withdrawal SET verified = true WHERE id = '$id' AND verified=false";
     $res = mysqli_query($conn, $query);
     if ($res) {
-        $query = "SELECT users.email, users.username  
+        $query = "SELECT users.email, users.username, withdrawal.amount, wallet.wallet_code,wallet.wallet_rate
         FROM withdrawal 
         JOIN users 
         ON withdrawal.user = users.id 
+        JOIN wallet ON withdrawal.wallet_type = wallet.id
         WHERE withdrawal.id='$id'";
         $res = mysqli_query($conn, $query);
         $row = $res->fetch_assoc();
         $username = $row["username"];
         $email = $row["email"];
+        $amount = $row['amount'] * $row['wallet_rate'];
+        $walletType = $row["wallet_code"];
+        $amount = number_format($amount, intval($amount) == 0 ? 5 : 2) . " " . $row["wallet_code"];
         $msg = html_entity_decode(" 
-        I hope this email finds you well.
-        
-        I'm writing to confirm that we have received your recent withdraw. Thank you for choosing to invest with us. Your transaction has been successfully processed, and the funds are now credited to your wallet. ");
+  Your withdrawal of $amount has been successfully processed and funds are now credited to your $walletType wallet. Thank you for choosing to invest with us.");
         $search = ["{type}", "{user}", "{body}", "{date}"];
         $replace = ["Withdrawal Request Verified", $username, $msg, date("Y")];
         $send = sendEmail($email, "Withdrawal Confirmed", "../email.html", $search, $replace);

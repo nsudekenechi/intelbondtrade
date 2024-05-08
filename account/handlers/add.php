@@ -49,9 +49,9 @@ if (isset($_POST["verify_deposit"])) {
             while ($row = $res->fetch_assoc()) {
                 // Message for user
                 if ($row["admin"] != true) {
-                    $msg = html_entity_decode(" <p style='margin-bottom: 10px;'>I hope this message finds you well. We are writing to confirm that we have received your deposit request of $amount $walletType</p>
+                    $msg = html_entity_decode(" <p style='margin-bottom: 10px;'>We have received your deposit request of $amount $walletType</p>
                     <p style='margin-bottom: 10px;'> Our team is currently processing your request, and we will update your account accordingly once the deposit has been successfully verified.</p>
-                <p style='margin-bottom: 10px;'>  Should you have any questions or require further assistance, please feel free to reach out to our support team at support@intelbondtrade.ltd.</p>
+                <p style='margin-bottom: 10px;'>  Should you have any questions or require further assistance, please feel free to reach out to our support team.</p>
               ");
 
                 } else {
@@ -110,12 +110,12 @@ if (isset($_POST["withdrawal"])) {
     while ($row = $res->fetch_assoc()) {
         // Message for user
         if ($row["admin"] != true) {
-            $msg = html_entity_decode(" <p style='margin-bottom: 10px;'> Thank you for your withdrawal request. We're processing it promptly. </p>  <p style='margin-bottom: 10px;'>You'll receive an email confirmation once the transaction is complete.</p>");
+            $msg = html_entity_decode(" <p style='margin-bottom: 10px;'> Thank you for your withdrawal request of $amount $walletType. We're processing it promptly. </p>  <p style='margin-bottom: 10px;'>You'll receive an email confirmation once the transaction is complete.</p>");
         } else {
             // sending email to user
             $msg = html_entity_decode(" <p style='margin-bottom: 10px;'> This is to inform you that $username wants to withdraw $amount to their $walletType wallet</p>  <p style='margin-bottom: 10px;'>Check your dashboard for more details about the withdrawal</p>");
         }
-        $send = sendEmail($row["email"], "Confirmation Of Withdrawal Request", "../../email.html", ["{type}", "{user}", "{body}", "{date}"], ["Deposit Request", $row["username"], $msg, date("Y")]);
+        $send = sendEmail($row["email"], "Confirmation Of Withdrawal Request", "../../email.html", ["{type}", "{user}", "{body}", "{date}"], ["Withdrawal Request", $row["username"], $msg, date("Y")]);
         $count++;
 
     }

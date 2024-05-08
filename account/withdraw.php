@@ -83,8 +83,7 @@ require_once "./includes/header.php";
                                         $res = mysqli_query($conn, $query);
                                         $row = $res->fetch_assoc();
                                         ?>
-                                        <a class="invest-cc-chosen dropdown-indicator" data-bs-toggle="dropdown"
-                                            id="payment">
+                                        <a class="invest-cc-chosen " data-bs-toggle="dropdown" id="payment">
                                             <div class="coin-item">
 
                                                 <div class="coin-info">
@@ -96,7 +95,7 @@ require_once "./includes/header.php";
                                                 </div>
                                             </div>
                                         </a>
-                                        <div class="dropdown-menu dropdown-menu-auto dropdown-menu-mxh">
+                                        <div class="dropdown-menu dropdown-menu-auto dropdown-menu-mxh" hidden>
                                             <ul class="invest-cc-list">
                                                 <?php
                                                 $query = "SELECT * FROM wallet WHERE wallet_code IN ('USDT', 'BTC', 'TRX', 'LITECOIN')";
@@ -104,7 +103,7 @@ require_once "./includes/header.php";
 
                                                 while ($row = $res->fetch_assoc()) {
                                                     ?>
-                                                    <li class="invest-cc-item" data-id="<?= $row['id']; ?>">
+                                                    <!-- <li class="invest-cc-item" data-id="<?= $row['id']; ?>">
                                                         <a class="invest-cc-opt" data-plan="silver">
                                                             <div class="coin-item">
 
@@ -121,7 +120,7 @@ require_once "./includes/header.php";
                                                             </div>
                                                         </a>
 
-                                                    </li>
+                                                    </li> -->
                                                     <?php
                                                 }
                                                 ?>
@@ -253,13 +252,14 @@ require_once "./includes/footer.php";
     let form = document.querySelector("form")
     let withdrawal = document.querySelector("button[name='withdrawal']")
     // choosing payment method
-    paymentMethods.forEach(item => {
-        item.onclick = () => {
-            activePaymentMethod.querySelector(".coin-item").innerHTML = item.querySelector(".coin-item").innerHTML;
-            document.querySelector("#wallet_address").innerHTML = item.querySelector(".wallet_code").innerHTML.trim()
-            document.querySelector("#wallet_type").value = item.querySelector(".wallet_id").innerHTML.trim()
-        }
-    })
+    // paymentMethods.forEach(item => {
+    //     item.onclick = () => {
+    //         activePaymentMethod.querySelector(".coin-item").innerHTML = item.querySelector(".coin-item").innerHTML;
+    //         document.querySelector("#wallet_address").innerHTML = item.querySelector(".wallet_code").innerHTML.trim()
+    //         document.querySelector("#wallet_type").value = item.querySelector(".wallet_id").innerHTML.trim()
+    //         document.querySelector("#paymentMethod").innerHTML = item.querySelector(".coin-item").innerHTML;
+    //     }
+    // })
 
 
     wallet_amount.forEach(item => {
@@ -294,4 +294,5 @@ require_once "./includes/footer.php";
     }
     let time = new Date().toLocaleTimeString("en-us", { hour12: true, timeStyle: "short" });
     document.querySelector("#time").value = time;
+    console.log()
 </script>

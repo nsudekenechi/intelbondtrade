@@ -14,8 +14,8 @@ require_once ("./includes/header.php");
 </style>
 <!-- content @s -->
 <div class="nk-content nk-content-lg nk-content-fluid">
-    <div class="container-xl wide-lg">
-        <div class="nk-content-inner">
+    <div class="container-xl wide-lg py-5">
+        <div class="nk-content-inner py-5">
             <div class="nk-content-body">
                 <div class="nk-block-head text-center">
                     <div class="nk-block-head-content">

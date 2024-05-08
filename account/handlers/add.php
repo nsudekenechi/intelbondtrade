@@ -103,22 +103,24 @@ if (isset($_POST["withdrawal"])) {
     $amount = number_format($amount, intval($amount) == 0 ? 5 : 2);
     $walletType = $row['wallet_code'];
 
-
+    $count = 0;
+    $query = "SELECT id,email,username,admin FROM users WHERE admin = true OR id='$user'";
+    $res = mysqli_query($conn, $query);
     // sending email to admin
     while ($row = $res->fetch_assoc()) {
         // Message for user
         if ($row["admin"] != true) {
             $msg = html_entity_decode(" <p style='margin-bottom: 10px;'> Thank you for your withdrawal request. We're processing it promptly. </p>  <p style='margin-bottom: 10px;'>You'll receive an email confirmation once the transaction is complete.</p>");
         } else {
+            // sending email to user
             $msg = html_entity_decode(" <p style='margin-bottom: 10px;'> This is to inform you that $username wants to withdraw $amount to their $walletType wallet</p>  <p style='margin-bottom: 10px;'>Check your dashboard for more details about the withdrawal</p>");
         }
-        $count++;
         $send = sendEmail($row["email"], "Confirmation Of Withdrawal Request", "../../email.html", ["{type}", "{user}", "{body}", "{date}"], ["Deposit Request", $row["username"], $msg, date("Y")]);
+        $count++;
 
     }
 
 
-    // sending email to user
     if ($count == $res->num_rows) {
         header("Location: ../withdraw.php?withdraw=s");
     } else {

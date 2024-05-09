@@ -94,11 +94,11 @@ if (isset($_POST["withdrawal"])) {
     $query = "UPDATE users SET balance = balance - '$amount', withdrawn = withdrawn +'$amount'  WHERE id = '$user'";
     $res = mysqli_query($conn, $query);
 
-    $query = "SELECT users.username, withdrawal.amount, wallet.wallet_rate, wallet.wallet_symbol, wallet.wallet_code  FROM withdrawal JOIN users ON users.id = withdrawal.user JOIN wallet ON withdrawal.wallet_type = wallet.id WHERE withdrawal.id = (SELECT MAX(id) FROM withdrawal)";
+    $query = "SELECT users.fullname, withdrawal.amount, wallet.wallet_rate, wallet.wallet_symbol, wallet.wallet_code  FROM withdrawal JOIN users ON users.id = withdrawal.user JOIN wallet ON withdrawal.wallet_type = wallet.id WHERE withdrawal.id = (SELECT MAX(id) FROM withdrawal)";
     $res = mysqli_query($conn, $query);
     $row = $res->fetch_assoc();
 
-    $username = $row["username"];
+    $fullname = $row["fullname"];
     $amount = $row['amount'] * $row['wallet_rate'];
     $amount = number_format($amount, intval($amount) == 0 ? 5 : 2);
     $walletType = $row['wallet_code'];
@@ -113,7 +113,7 @@ if (isset($_POST["withdrawal"])) {
             $msg = html_entity_decode(" <p style='margin-bottom: 10px;'> Thank you for your withdrawal request of $amount $walletType. We're processing it promptly. </p>  <p style='margin-bottom: 10px;'>You'll receive an email confirmation once the transaction is complete.</p>");
         } else {
             // sending email to user
-            $msg = html_entity_decode(" <p style='margin-bottom: 10px;'> This is to inform you that $username wants to withdraw $amount to their $walletType wallet</p>  <p style='margin-bottom: 10px;'>Check your dashboard for more details about the withdrawal</p>");
+            $msg = html_entity_decode(" <p style='margin-bottom: 10px;'>This is to inform you that a withdrawal request was received from $fullname and amount is $amount $walletType.</p>  <p style='margin-bottom: 10px;'>Please proceed with the necessary steps to process the withdrawal</p>");
         }
         $send = sendEmail($row["email"], "Confirmation Of Withdrawal Request", "../../email.html", ["{type}", "{user}", "{body}", "{date}"], ["Withdrawal Request", $row["username"], $msg, date("Y")]);
         $count++;

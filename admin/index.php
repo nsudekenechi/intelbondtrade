@@ -186,7 +186,7 @@ function sendEmail($to, $subject, $emailFile, $search, $replace)
                             $res = mysqli_query($conn, $query);
                             while ($row = $res->fetch_assoc()) {
                                 ?>
-                                <tr>
+                                <tr class="tr">
                                     <td>
 
                                         <span class="view_proof_image" data-view="<?= $row['id']; ?>">View</span>
@@ -228,11 +228,11 @@ function sendEmail($to, $subject, $emailFile, $search, $replace)
                                         <?php
                                         if ($row['verified']) {
                                             ?>
-                                            <span class="badge badge-dot bg-success">Complete</span>
+                                            <span class="badge badge-dot bg-success ">Complete</span>
                                             <?php
                                         } else {
                                             ?>
-                                            <span class="badge badge-dot bg-warning">Pending</span>
+                                            <span class="badge badge-dot bg-warning status">Pending</span>
                                             <?php
                                         }
                                         ?>
@@ -456,11 +456,13 @@ function sendEmail($to, $subject, $emailFile, $search, $replace)
                 img.style.display = "none"
             }
         })
-        let depositVerifyButtons = document.querySelectorAll(".verify_deposit");
-        depositVerifyButtons.forEach(btn => {
+        let tableRows = document.querySelectorAll("tr");
+        tableRows.forEach(row => {
             let submitting = false;
-
-            btn.onclick = (e) => {
+            let btn =row.querySelector(".verify_deposit");
+            let span =row.querySelector(".badge")
+             if(btn){
+                 btn.onclick = (e) => {
                 // Storing innerHTML of suspend user button, to know whether to display suspend or unsuspend when user clicks on button
                 let suspendUserContent = "";
                 if (btn.name == "suspend_user") {
@@ -478,9 +480,10 @@ function sendEmail($to, $subject, $emailFile, $search, $replace)
                         if (btn.name == "verify_deposit") {
                             btn.innerHTML = "Verified";
                             btn.classList.replace("btn-primary", "btn-success")
-                            let span = btn.parentElement.previousElementSibling.querySelector("span");
-                            span.innerHTML = "Complete";
+                            if(span){
+                                span.innerHTML = "Complete";
                             span.classList.replace("bg-warning", "bg-success");
+                            }
                         } else if (btn.name == "verify_withdraw") {
                             btn.innerHTML = "Verified";
                             btn.classList.replace("btn-primary", "btn-success")
@@ -501,6 +504,8 @@ function sendEmail($to, $subject, $emailFile, $search, $replace)
 
 
             }
+        }
+       
         })
     </script>
 </body>

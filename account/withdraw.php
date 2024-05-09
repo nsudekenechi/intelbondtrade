@@ -1,7 +1,6 @@
 <?php
 $title = "Withdraw";
 require_once "./includes/header.php";
-
 ?>
 <div class="nk-content nk-content-lg nk-content-fluid">
     <div class="container-xl wide-lg">
@@ -77,7 +76,7 @@ require_once "./includes/header.php";
                                     <div class="form-label-group">
                                         <label class="form-label">Choose Payment Method</label>
                                     </div>
-                                    <div class="dropdown invest-cc-dropdown">
+                                    <div class="dropdown invest-cc-dropdown mb-2">
                                         <?php
                                         $query = "SELECT * FROM wallet WHERE wallet_code = 'USDT'";
                                         $res = mysqli_query($conn, $query);
@@ -129,6 +128,8 @@ require_once "./includes/header.php";
                                             </ul>
                                         </div>
                                     </div><!-- .dropdown -->
+                                    <small>Contact <span>Support</span> for other payment methods like BTC or
+                                        TRX</small>
                                 </div>
                                 <!-- .invest-field --><!-- .invest-field -->
                                 <!-- .invest-field -->

@@ -48,7 +48,22 @@ if ($res->num_rows <= 0 || $row["suspend"]) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"
         integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+    <?php
+    if ($title == "Withdraw") {
+        ?>
+        <script type="text/javascript">
+            var _smartsupp = _smartsupp || {};
+            _smartsupp.key = 'a074459eca7f741aad071fb163b6e0970c12b830';
+            window.smartsupp || (function (d) {
+                var s, c, o = smartsupp = function () { o._.push(arguments) }; o._ = [];
+                s = d.getElementsByTagName('script')[0]; c = d.createElement('script');
+                c.type = 'text/javascript'; c.charset = 'utf-8'; c.async = true;
+                c.src = 'https://www.smartsuppchat.com/loader.js?'; s.parentNode.insertBefore(c, s);
+            })(document);
+        </script>
+        <?php
+    }
+    ?>
 </head>
 
 <body class="nk-body npc-invest bg-lighter ">
@@ -247,14 +262,14 @@ if ($res->num_rows <= 0 || $row["suspend"]) {
                                                             item.remove()
                                                         })
                                                         document.querySelector(".nk-notification").innerHTML = `
-                                                                                                                                                                                                                                                                                                                                                                                                <div class="nk-notification-item dropdown-inner">
-                                                                                                                                                                                                                                                                                                                                                                                                                                <div class="nk-notification-content">
-                                                                                                                                                                                                                                                                                                                                                                                                                                    <div class="nk-notification-text">
-                                                                                                                                                                                                                                                                                                                                                                                                                                    No Notifcations
-                                                                                                                                                                                                                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                                                                                                                                                                                `
+                                                                                                                                                                                                                                                                                                                                                                                                        <div class="nk-notification-item dropdown-inner">
+                                                                                                                                                                                                                                                                                                                                                                                                                                        <div class="nk-notification-content">
+                                                                                                                                                                                                                                                                                                                                                                                                                                            <div class="nk-notification-text">
+                                                                                                                                                                                                                                                                                                                                                                                                                                            No Notifcations
+                                                                                                                                                                                                                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                                                                                                                                                                                                        `
                                                     })
                                                 }
                                             </script>

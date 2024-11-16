@@ -78,7 +78,9 @@ require_once "./includes/header.php";
                             </div><!-- .nk-slider -->
                         </div><!-- .nk-block-head-content -->
                     </div><!-- .nk-block-between -->
-                </div><!-- .nk-block-head -->
+                </div>
+
+                <!-- .nk-block-head -->
                 <!-- <div class="nk-block">
                     <div class="nk-news card card-bordered">
                         <div class="card-inner">

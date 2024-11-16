@@ -1,5 +1,5 @@
 <?php
-require_once ("../db/db_connect.php");
+require_once("../db/db_connect.php");
 session_start();
 if (!isset($_SESSION["user"])) {
     header("Location: ../login.php");
@@ -70,7 +70,7 @@ if ($res->num_rows <= 0 || $row["suspend"]) {
 
     <div class="nk-app-root">
         <?php
-        require_once ("../includes/googleTranslate.php");
+        require_once("../includes/googleTranslate.php");
 
         ?>
         <!-- wrap @s -->
@@ -128,6 +128,12 @@ if ($res->num_rows <= 0 || $row["suspend"]) {
                                 <li class="nk-menu-item">
                                     <a href="./profile.php" class="nk-menu-link">
                                         <span class="nk-menu-text">Profile</span>
+                                    </a>
+                                </li>
+
+                                <li class="nk-menu-item">
+                                    <a href="./reinvest.php" class="nk-menu-link">
+                                        <span class="nk-menu-text">Reinvest</span>
                                     </a>
                                 </li>
                                 <!-- <li class="nk-menu-item  has-sub">
@@ -262,14 +268,14 @@ if ($res->num_rows <= 0 || $row["suspend"]) {
                                                             item.remove()
                                                         })
                                                         document.querySelector(".nk-notification").innerHTML = `
-                                                                                                                                                                                                                                                                                                                                                                                                            <div class="nk-notification-item dropdown-inner">
-                                                                                                                                                                                                                                                                                                                                                                                                                                            <div class="nk-notification-content">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                <div class="nk-notification-text">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                No Notifcations
-                                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                                                                                                                                                                                                                            `
+                                                                                                                                                                                                                                                                                                                                                                                                                                <div class="nk-notification-item dropdown-inner">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                <div class="nk-notification-content">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <div class="nk-notification-text">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    No Notifcations
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                `
                                                     })
                                                 }
                                             </script>

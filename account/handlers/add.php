@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once "../../db/db_connect.php";
-require_once ("email.php");
+require_once("email.php");
 $user = $_SESSION["user"];
 
 // Depositing into user's account
@@ -126,6 +126,29 @@ if (isset($_POST["withdrawal"])) {
     } else {
         header("Location: ../withdraw.php?withdraw=f");
     }
+}
+
+// Reinvest
+if (isset($_POST["reinvest"])) {
+    extract($_POST);
+    print_r($_POST);
+
+    if ($balance > $amount) {
+        $startDate = date('d-M-Y h:i');
+        $endDate = date('d-M-Y h:i', strtotime($days . 'days'));
+        $query = "INSERT INTO deposits (amount,user,plan,wallet,start_date,end_date, verified)  VALUES ('$amount', '$user', '$plan', ' ', '$startDate', '$endDate', true)";
+        $res = mysqli_query($conn, $query);
+        $query = "UPDATE users SET balance = balance - $amount,invested = invested + $amount WHERE id = '$user'";
+        $res = mysqli_query($conn, $query);
+        if ($res) {
+            header("Location: ../reinvest.php?reinvest=s");
+        } else {
+            header("Location: ../reinvest.php?reinvest=f");
+        }
+    } else {
+        header("Location: ../reinvest.php?reinvest=bf");
+    }
+
 }
 
 

@@ -1,6 +1,6 @@
 <?php
 $title = "Invest";
-require_once ("./includes/header.php");
+require_once("./includes/header.php");
 
 
 ?>
@@ -126,7 +126,9 @@ require_once ("./includes/header.php");
 
 
                                     </div>
-                                </div><!-- .invest-field -->
+                                </div>
+
+                                <!-- .invest-field -->
                                 <div class="invest-field form-group">
                                     <div class="form-label-group">
                                         <label class="form-label">Or Enter Your Amount</label>
@@ -475,7 +477,7 @@ if (isset($_GET["deposit"])) {
 }
 ?>
 <?php
-require_once ("./includes/footer.php");
+require_once("./includes/footer.php");
 ?>
 
 <script>

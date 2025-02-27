@@ -1,11 +1,35 @@
 <?php
-require_once ("../db/db_connect.php");
+require_once("../db/db_connect.php");
 require_once "./email.php";
 session_start();
 
+function verifyCaptcha($POST)
+{
+
+    if (isset($POST["g-recaptcha-response"]) && !empty($POST["g-recaptcha-respons"])) {
+        $secret = "6LfQaOQqAAAAABgX9Ypj3FEFvHNEijaP8KjqzOIc";
+        $response = $POST["g-recaptcha-response"];
+        $verifyResponse = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secret&response=$response");
+        $response = json_decode($verifyResponse);
+
+        if (!$response->success) {
+
+            return false;
+        }
+    } else {
+
+        return false;
+    }
+}
+
 // Adding Users to DB
 if (isset($_POST["signUp"])) {
-    extract($_POST);
+    $POST = filter_var_array($_POST, FILTER_SANITIZE_STRING);
+    extract($POST);
+    // verifying recaptcha is valid
+    if (!verifyCaptcha($POST)) {
+        header("Location: ../signup.php");
+    }
     $hashPassword = password_hash($password, PASSWORD_DEFAULT);
     $query = "INSERT INTO users (fullname,username,email,password)  VALUES ('$fullname', '$username','$email','$hashPassword')";
     $res = mysqli_query($conn, $query);
@@ -81,7 +105,12 @@ if (isset($_GET["verifyUsername"])) {
 
 // Logging user in
 if (isset($_POST["login"])) {
-    extract($_POST);
+    $POST = filter_var_array($_POST, FILTER_SANITIZE_STRING);
+    extract($POST);
+    // verifying recaptcha is valid
+    if (!verifyCaptcha($POST)) {
+        header("Location: ../login.php");
+    }
     $query = "SELECT * FROM users WHERE username='$username' OR email='$username'";
     $res = mysqli_query($conn, $query);
     if ($res->num_rows) {

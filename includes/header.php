@@ -27,6 +27,7 @@
 	<link rel="stylesheet" href="assets/css/global.css">
 	<link rel="stylesheet" href="assets/css/style.css">
 	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 	<!-- Smartsupp Live Chat script -->
 	<!-- Smartsupp Live Chat script -->
@@ -45,8 +46,8 @@
 <body>
 
 	<?php
-	require_once ("./db/db_connect.php");
-	require_once (__DIR__ . "/googleTranslate.php");
+	require_once("./db/db_connect.php");
+	require_once(__DIR__ . "/googleTranslate.php");
 	if (isset($_GET["ref"])) {
 		session_start();
 		$_SESSION["ref"] = $_GET["ref"];

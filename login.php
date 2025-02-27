@@ -1,6 +1,6 @@
 <?php
 $title = "Login";
-include_once ("./includes/header.php");
+include_once("./includes/header.php");
 ?>
 <style>
     .animate-invalid {
@@ -52,6 +52,7 @@ include_once ("./includes/header.php");
                                             style="color:red;font-size:13px;position:absolute;width:100%;bottom:10px;left:10px;"></span>
                                     </div>
                                     <div class="col-12 col-md-6">
+
                                         <button type="submit" class="w-100" name="login">Login</button>
                                     </div>
 
@@ -59,13 +60,16 @@ include_once ("./includes/header.php");
                                         <a href="./forgotpassword.php">Forgot Password</a>
                                     </div>
 
+                                    <div class="col-md-12">
+                                        <div class="g-recaptcha"
+                                            data-sitekey="6LfQaOQqAAAAADxVN3Zm8u36jWhepFHmLrVmE3F-"></div>
+                                    </div>
+
                                     <div class="col-md-12 d-flex justify-content-center my-5">
                                         Don't have an account? <a href="./signup.php" class="in-text-gradiant mx-2">Sign
                                             up here</a>
                                     </div>
-                                    <div>
 
-                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -80,6 +84,7 @@ include_once ("./includes/header.php");
 <script>
     let inputs = document.querySelectorAll("input");
     let err = document.querySelector("#err");
+    let form = document.querySelector("form")
     if (location.search.includes("=f")) {
         inputs.forEach(input => {
             checkErr(input)
@@ -99,6 +104,22 @@ include_once ("./includes/header.php");
         }).showToast();
     }
 
+    form.onsubmit = () => {
+        var response = grecaptcha.getResponse(); // Get reCAPTCHA response
+
+        if (response.length === 0) {
+            Toastify({
+                text: "Please check the reCAPTCHA before submitting.",
+                style: {
+                    background: "red",
+                    color: "white"
+                }
+
+            }).showToast()
+
+            return false;
+        }
+    }
     function checkErr(elem) {
         elem.style.outline = "1px solid red"
         elem.classList.add("animate-invalid")
@@ -109,5 +130,5 @@ include_once ("./includes/header.php");
     }
 </script>
 <?php
-require_once ("./includes/footer.php");
+require_once("./includes/footer.php");
 ?>

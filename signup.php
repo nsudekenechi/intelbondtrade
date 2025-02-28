@@ -1,6 +1,6 @@
 <?php
 $title = "Sign up";
-include_once ("./includes/header.php");
+include_once("./includes/header.php");
 ?>
 <style>
     .animate-invalid {
@@ -78,6 +78,10 @@ include_once ("./includes/header.php");
                                         <input required style="padding:30px;" type="password" name="confirmPassword"
                                             placeholder="Confirm Password">
                                     </div>
+                                    <div class="col-md-12">
+                                        <div class="g-recaptcha"
+                                            data-sitekey="6LfQaOQqAAAAADxVN3Zm8u36jWhepFHmLrVmE3F-"></div>
+                                    </div>
                                     <div class="col-12 ">
                                         <button name="signUp" type="submit" class="w-100">Sign Up</button>
                                     </div>
@@ -114,7 +118,7 @@ include_once ("./includes/header.php");
         username: false
     };
     let p = document.querySelectorAll("#regExp p")
-
+    var response = grecaptcha.getResponse(); // Get reCAPTCHA response
     // Validating strong password
 
 
@@ -141,6 +145,18 @@ include_once ("./includes/header.php");
             validate = false;
         }
 
+        if (response.length === 0) {
+            Toastify({
+                text: "Please check the reCAPTCHA before submitting.",
+                style: {
+                    background: "red",
+                    color: "white"
+                }
+
+            }).showToast()
+
+            validate = false;
+        }
         return validate;
 
 
@@ -174,5 +190,5 @@ include_once ("./includes/header.php");
     }
 </script>
 <?php
-require_once ("./includes/footer.php");
+require_once("./includes/footer.php");
 ?>

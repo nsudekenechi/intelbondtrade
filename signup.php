@@ -118,8 +118,7 @@ include_once("./includes/header.php");
         username: false
     };
     let p = document.querySelectorAll("#regExp p")
-    var response = grecaptcha.getResponse(); // Get reCAPTCHA response
-    // Validating strong password
+
 
 
 
@@ -145,6 +144,8 @@ include_once("./includes/header.php");
             validate = false;
         }
 
+        var response = grecaptcha.getResponse(); // Get reCAPTCHA response
+        // Validating strong password
         if (response.length === 0) {
             Toastify({
                 text: "Please check the reCAPTCHA before submitting.",

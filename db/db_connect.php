@@ -1,14 +1,17 @@
 <?php
+require_once dirname(__DIR__) . "/vendor/autoload.php";
+$dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
+$dotenv->load();
 $host = "localhost";
-$mode = "";
+$mode = "test";
 if ($mode == "test") {
     $username = "root";
     $password = "";
     $db = "intelbondtrade";
 } else {
-    $username = "inteopax_db_user";
-    $password = "#db_user123";
-    $db = "inteopax_intelbondtrade";
+    $username = $_ENV["DB_USER"];
+    $password = $_ENV["DB_PASSWORD"];
+    $db = $_ENV["DB_NAME"];
 }
 
 $conn = mysqli_connect($host, $username, $password, $db);

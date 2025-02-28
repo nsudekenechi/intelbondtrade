@@ -27,7 +27,7 @@ if (isset($_POST["signUp"])) {
     $POST = filter_var_array($_POST, FILTER_SANITIZE_STRING);
     extract($POST);
     // verifying recaptcha is valid
-    if (!verifyCaptcha($POST)) {
+    if (!verifyCaptcha($_POST)) {
         header("Location: ../signup.php");
     }
     $hashPassword = password_hash($password, PASSWORD_DEFAULT);
@@ -108,7 +108,7 @@ if (isset($_POST["login"])) {
     $POST = filter_var_array($_POST, FILTER_SANITIZE_STRING);
     extract($POST);
     // verifying recaptcha is valid
-    if (!verifyCaptcha($POST)) {
+    if (!verifyCaptcha($_POST)) {
         header("Location: ../login.php");
     }
     $query = "SELECT * FROM users WHERE username='$username' OR email='$username'";
@@ -171,7 +171,8 @@ if (isset($_GET["resetPassword"])) {
 
 // Verify code
 if (isset($_POST["verifyCode"])) {
-    extract($_POST);
+   $POST = filter_var_array($_POST, FILTER_SANITIZE_STRING);
+    extract($POST);
     $email = $_SESSION["forgotpassword"];
     $query = "SELECT * FROM forgotpassword WHERE email ='$email' ORDER BY id DESC LIMIT 1";
     $res = mysqli_query($conn, $query);
@@ -186,7 +187,8 @@ if (isset($_POST["verifyCode"])) {
 
 // Reset Password
 if (isset($_POST["reset"])) {
-    extract($_POST);
+    $POST = filter_var_array($_POST, FILTER_SANITIZE_STRING);
+    extract($POST);
     $email = $_SESSION["forgotpassword"];
     $hashPassword = password_hash($password, PASSWORD_DEFAULT);
     // Updating user's password
